@@ -11,7 +11,9 @@ import {
   ArrowUpRight, ArrowDownRight, BarChart3, Bell, Eye,
   Thermometer, Droplets, Sun, Clock, CheckCircle2, AlertCircle,
   Apple, Filter, ShieldCheck, Database, Zap, Lock, Globe,
-  RefreshCw, Settings, FileText, Download, FlaskConical, Microscope
+  RefreshCw, Settings, FileText, Download, FlaskConical, Microscope,
+  ChevronDown, X, Calendar, AlertTriangle, Server, Wifi, FileBarChart,
+  UserCog, History, Mail, Play, Copy, ExternalLink, Printer, ToggleLeft
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -184,6 +186,66 @@ const COST_TREND = [
   {m:"Jun '25",fam:3420,ctrl:3380},{m:"Jul",fam:3280,ctrl:3400},{m:"Aug",fam:3060,ctrl:3420},
   {m:"Sep",fam:2800,ctrl:3440},{m:"Oct",fam:2580,ctrl:3460},{m:"Nov",fam:2380,ctrl:3480},
   {m:"Dec",fam:2220,ctrl:3500},{m:"Jan '26",fam:2080,ctrl:3520},{m:"Feb",fam:1960,ctrl:3540},
+];
+
+// ── Notifications ─────────────────────────────────────────────────────
+const NOTIFS = [
+  {id:1,type:"alert",msg:"Maria Santos A1C dropped below target — 6.8% (target 7.0%)",time:"2 min ago",read:false},
+  {id:2,type:"sync",msg:"Leaf AgTech sync completed — 6 batches updated, 0 anomalies",time:"15 min ago",read:false},
+  {id:3,type:"alert",msg:"Carlos Rodriguez eGFR declining trend — schedule nephrology follow-up",time:"1 hr ago",read:false},
+  {id:4,type:"report",msg:"Monthly Program Report (Jan 2026) auto-generated and ready",time:"2 hrs ago",read:true},
+  {id:5,type:"sync",msg:"Epic FHIR — 12 new lab results imported across 8 patients",time:"3 hrs ago",read:true},
+  {id:6,type:"milestone",msg:"Program milestone reached: 166,000 meals served!",time:"1 day ago",read:true},
+  {id:7,type:"alert",msg:"Terrance Howard adherence dropped below 70% threshold",time:"1 day ago",read:true},
+  {id:8,type:"report",msg:"Quarterly Cost-Benefit Analysis (Q4 2025) generated",time:"2 days ago",read:true},
+];
+const NOTIF_ICON = {alert:AlertTriangle,sync:RefreshCw,report:FileBarChart,milestone:CheckCircle2};
+const NOTIF_COLOR = {alert:"text-red-500",sync:"text-emerald-500",report:"text-blue-500",milestone:"text-amber-500"};
+
+// ── Report Templates ──────────────────────────────────────────────────
+const RPT_TEMPLATES = [
+  {id:"monthly",name:"Monthly Program Report",desc:"Enrollment, meal distribution, clinical outcomes, and cost impact across all hub sites.",pages:"12–14",freq:"Monthly",last:"Jan 31, 2026",Icon:FileBarChart,color:"bg-emerald-50 border-emerald-200",tags:["Enrollment","Meals","Outcomes","Cost"]},
+  {id:"quarterly",name:"Quarterly Clinical Outcomes",desc:"A1C, BP, BMI trends with statistical significance testing and cohort comparison vs standard of care.",pages:"18–22",freq:"Quarterly",last:"Dec 31, 2025",Icon:BarChart3,color:"bg-sky-50 border-sky-200",tags:["A1C","BP","Stats","Cohort"]},
+  {id:"cost",name:"Cost-Benefit Analysis",desc:"CFO-ready financial impact — ER avoidance, medication reduction, projected savings by facility.",pages:"8–10",freq:"Quarterly",last:"Dec 31, 2025",Icon:Scale,color:"bg-amber-50 border-amber-200",tags:["ROI","ER Costs","Meds","Facility"]},
+  {id:"crop",name:"Crop Traceability Report",desc:"Full chain-of-custody from seed lot to patient outcome for all active batches with nutrient assays.",pages:"24–28",freq:"On demand",last:"Feb 10, 2026",Icon:Sprout,color:"bg-emerald-50 border-emerald-200",tags:["Batches","Nutrients","IoT","Outcomes"]},
+  {id:"cohort",name:"Patient Cohort Summary",desc:"De-identified cohort analysis for research collaboration and IRB reporting — HIPAA Safe Harbor compliant.",pages:"14–16",freq:"Monthly",last:"Jan 31, 2026",Icon:Users,color:"bg-violet-50 border-violet-200",tags:["Demographics","Adherence","De-ID","IRB"]},
+  {id:"irb",name:"IRB Submission Package",desc:"Complete institutional review board package — protocol, consent templates, data dictionary, preliminary findings.",pages:"32–40",freq:"As needed",last:"Oct 15, 2025",Icon:ShieldCheck,color:"bg-rose-50 border-rose-200",tags:["Protocol","Consent","Safety","Results"]},
+];
+const RECENT_RPTS = [
+  {name:"Monthly Program Report — January 2026",gen:"Jan 31, 2026",pages:13,size:"2.4 MB",by:"System (scheduled)"},
+  {name:"Quarterly Clinical Outcomes — Q4 2025",gen:"Dec 31, 2025",pages:21,size:"4.1 MB",by:"Dr. Sarah Chen"},
+  {name:"Cost-Benefit Analysis — Q4 2025",gen:"Dec 31, 2025",pages:9,size:"1.8 MB",by:"System (scheduled)"},
+  {name:"Crop Traceability — Batch KL-2026-0147",gen:"Feb 10, 2026",pages:6,size:"1.2 MB",by:"Jamal Harrison"},
+  {name:"Patient Cohort Summary — January 2026",gen:"Jan 31, 2026",pages:15,size:"2.8 MB",by:"System (scheduled)"},
+];
+
+// ── Integration Data ──────────────────────────────────────────────────
+const INTEG = [
+  {key:"epic",name:"Epic FHIR R4",uptime:99.97,lastSync:"2 min ago",records:"4,847",recLabel:"clinical records",endpoints:12,webhooks:3,version:"FHIR R4 v4.0.1",since:"Aug 2025",syncHist:[42,44,38,51,46,48,43,47,50,44,52,46]},
+  {key:"leaf",name:"Leaf AgTech Platform",uptime:99.94,lastSync:"1 min ago",records:"48",recLabel:"active batches",endpoints:8,webhooks:2,version:"Leaf API v3.2",since:"Jul 2025",syncHist:[18,22,16,20,24,19,21,23,17,25,20,22]},
+  {key:"hub",name:"Nutrition Hub Distribution",uptime:99.91,lastSync:"4 min ago",records:"166,000",recLabel:"meals tracked",endpoints:6,webhooks:2,version:"Hub API v2.1",since:"Jan 2024",syncHist:[312,298,324,308,316,320,310,328,304,318,322,314]},
+];
+
+// ── Admin / Audit Data ────────────────────────────────────────────────
+const ADMIN_USERS = [
+  {name:"Jamal Harrison",role:"Program Director",email:"j.harrison@indyhealthdistrict.org",access:"Full Admin",last:"2 min ago",status:"active"},
+  {name:"Dr. Sarah Chen",role:"Clinical Lead",email:"s.chen@iuhealth.org",access:"Clinical + Reports",last:"34 min ago",status:"active"},
+  {name:"Dr. Amanda Williams",role:"Research PI",email:"a.williams@iuhealth.org",access:"Research + Export",last:"Yesterday",status:"active"},
+  {name:"Dr. Michael Torres",role:"Clinical",email:"m.torres@iuhealth.org",access:"Clinical View",last:"Today 9:14 AM",status:"active"},
+  {name:"Rachel Kim",role:"Data Analyst",email:"r.kim@iuhealth.org",access:"Analytics + Reports",last:"Today 8:52 AM",status:"active"},
+  {name:"Brett Bilon",role:"Platform Admin",email:"brett@phytiv.com",access:"Super Admin",last:"Now",status:"active"},
+];
+const AUDIT = [
+  {time:"10:42 AM",user:"Jamal Harrison",action:"Viewed patient detail",detail:"P-10847 (Maria Santos)"},
+  {time:"10:38 AM",user:"System",action:"FHIR sync completed",detail:"12 lab results imported from Epic"},
+  {time:"10:35 AM",user:"Dr. Sarah Chen",action:"Generated report",detail:"Crop Traceability — Batch KL-2026-0147"},
+  {time:"10:22 AM",user:"System",action:"Leaf telemetry sync",detail:"Greenhouse A, B, C sensor data updated"},
+  {time:"09:58 AM",user:"Admin",action:"Updated alert threshold",detail:"A1C alert changed from 7.5% to 7.0%"},
+  {time:"09:45 AM",user:"System",action:"Hub meal distribution sync",detail:"Daily: 312 meals across 5 sites"},
+  {time:"Yesterday 4:30 PM",user:"Dr. Amanda Williams",action:"Exported data",detail:"REDCap — 67 de-identified records"},
+  {time:"Yesterday 3:15 PM",user:"System",action:"Scheduled report",detail:"Monthly Program Report (Jan 2026) — 13 pages"},
+  {time:"Yesterday 1:02 PM",user:"Rachel Kim",action:"Ran cohort analysis",detail:"FaM vs Control — p<0.001 confirmed"},
+  {time:"Feb 11, 3:40 PM",user:"Jamal Harrison",action:"Added patient",detail:"P-11742 (Terrance Howard) enrolled in program"},
 ];
 
 // ── Nutrition Hub Program Data ────────────────────────────────────────
@@ -460,14 +522,31 @@ const DashboardView = ({goTo}) => (
 // ══════════════════════════════════════════
 // PATIENT LIST
 // ══════════════════════════════════════════
-const PatientList = ({goTo}) => (
+const PatientList = ({goTo}) => {
+  const [search,setSearch] = useState("");
+  const [statusFilter,setStatusFilter] = useState("all");
+  const filtered = PATIENTS.filter(p=>{
+    const sq=search.toLowerCase();
+    const matchSearch = !sq || p.name.toLowerCase().includes(sq) || p.id.toLowerCase().includes(sq) || p.conds.some(c=>c.toLowerCase().includes(sq)) || p.fac.toLowerCase().includes(sq) || p.dr.toLowerCase().includes(sq);
+    const matchStatus = statusFilter==="all" || p.status===statusFilter;
+    return matchSearch && matchStatus;
+  });
+  return (
   <div className="max-w-7xl">
     <div className="flex items-center justify-between mb-6">
-      <div><h2 className="text-lg font-bold text-slate-900">Patient Registry</h2><p className="text-sm text-slate-500">Enrolled patients with linked EHR and food prescription data</p></div>
+      <div><h2 className="text-lg font-bold text-slate-900">Patient Registry</h2><p className="text-sm text-slate-500">{filtered.length} of {PATIENTS.length} patients · linked EHR and food prescription data</p></div>
       <div className="flex gap-2">
-        <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3.5 py-2 text-sm text-slate-400 hover:border-slate-300 transition-colors cursor-text"><Search size={15}/><span>Search patients...</span></div>
-        <button className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg px-3.5 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors font-medium"><Filter size={15}/>Filters</button>
+        <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3.5 py-2 text-sm hover:border-slate-300 transition-colors">
+          <Search size={15} className="text-slate-400"/>
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search patients, conditions, facilities..." className="outline-none text-sm text-slate-700 placeholder:text-slate-400 w-64 bg-transparent"/>
+          {search && <button onClick={()=>setSearch("")} className="text-slate-300 hover:text-slate-500"><X size={14}/></button>}
+        </div>
       </div>
+    </div>
+    <div className="flex gap-2 mb-4">
+      {["all","improving","stable","monitoring","attention"].map(s=>(
+        <button key={s} onClick={()=>setStatusFilter(s)} className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all ${statusFilter===s?"bg-slate-900 text-white shadow-sm":"bg-white text-slate-500 border border-gray-200 hover:bg-slate-50"}`}>{s==="all"?"All Patients":s}</button>
+      ))}
     </div>
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
       <table className="w-full text-sm">
@@ -477,7 +556,9 @@ const PatientList = ({goTo}) => (
           <th className="text-center px-3 py-3.5 font-semibold">Systolic BP</th><th className="text-center px-3 py-3.5 font-semibold">Food Rx</th>
           <th className="text-center px-3 py-3.5 font-semibold">Status</th><th className="w-8 py-3.5"/>
         </tr></thead>
-        <tbody>{PATIENTS.map((p,idx)=>(
+        <tbody>{filtered.length===0?(
+          <tr><td colSpan={8} className="px-6 py-12 text-center text-sm text-slate-400">No patients match your search</td></tr>
+        ):filtered.map((p,idx)=>(
           <tr key={p.id} onClick={()=>goTo("patient-detail",p)} className={`border-b border-gray-50 cursor-pointer hover:bg-emerald-50/50 transition-colors ${idx%2?"bg-slate-50/40":""}`}>
             <td className="px-6 py-4"><p className="font-semibold text-slate-900">{p.name}</p><p className="text-xs text-slate-400">{p.id} &middot; {p.age}{p.g} &middot; {p.dr}</p></td>
             <td className="px-3 py-4 text-xs text-slate-600 font-medium">{p.fac}</td>
@@ -492,7 +573,8 @@ const PatientList = ({goTo}) => (
       </table>
     </div>
   </div>
-);
+  );
+};
 
 // ══════════════════════════════════════════
 // PATIENT DETAIL
@@ -990,19 +1072,246 @@ const ResearchView = () => {
 };
 
 // ══════════════════════════════════════════
+// INTEGRATIONS VIEW
+// ══════════════════════════════════════════
+const IntegrationsView = () => (
+  <div className="max-w-7xl space-y-6">
+    <div><h2 className="text-lg font-bold text-slate-900">System Integrations</h2><p className="text-sm text-slate-500">Connected data sources, API health, and sync monitoring</p></div>
+    <div className="grid grid-cols-3 gap-5">
+      {INTEG.map(ig=>{const s=SRC[ig.key]; const I=s.Icon; return(
+        <div key={ig.key} className={`bg-white rounded-xl border-2 ${s.border} p-6 shadow-sm`}>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3"><div className={`w-11 h-11 rounded-lg ${s.bg} border ${s.border} flex items-center justify-center`}><I size={22} className={s.text}/></div><div><p className="font-bold text-slate-900">{ig.name}</p><p className="text-xs text-slate-400 font-mono">{ig.version}</p></div></div>
+            <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"/>{ig.status||"Connected"}</span>
+          </div>
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="bg-slate-50 rounded-lg p-3"><p className="text-xs text-slate-400 font-semibold">Uptime</p><p className="text-lg font-bold text-emerald-600">{ig.uptime}%</p></div>
+            <div className="bg-slate-50 rounded-lg p-3"><p className="text-xs text-slate-400 font-semibold">Last Sync</p><p className="text-lg font-bold text-slate-900">{ig.lastSync}</p></div>
+          </div>
+          <div className="space-y-2.5 text-xs">
+            <div className="flex justify-between"><span className="text-slate-500">Records Synced</span><span className="font-bold text-slate-900">{ig.records} {ig.recLabel}</span></div>
+            <div className="flex justify-between"><span className="text-slate-500">API Endpoints</span><span className="font-bold text-slate-900">{ig.endpoints} active</span></div>
+            <div className="flex justify-between"><span className="text-slate-500">Webhooks</span><span className="font-bold text-slate-900">{ig.webhooks} configured</span></div>
+            <div className="flex justify-between"><span className="text-slate-500">Connected Since</span><span className="font-bold text-slate-900">{ig.since}</span></div>
+          </div>
+          <div className="mt-4 pt-3 border-t border-gray-100">
+            <p className="text-xs text-slate-400 font-semibold mb-2">Sync Volume (24h)</p>
+            <div className="flex items-end gap-1 h-10">
+              {ig.syncHist.map((v,i)=><div key={i} className={`flex-1 rounded-sm ${s.bg}`} style={{height:`${(v/Math.max(...ig.syncHist))*100}%`,minHeight:"4px"}}/>)}
+            </div>
+          </div>
+        </div>
+      );})}
+    </div>
+    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+      <Sect>Data Flow Architecture</Sect>
+      <p className="text-xs text-slate-400 mb-5">Real-time data pipeline connecting agricultural IoT, distribution network, and clinical EHR</p>
+      <div className="flex items-stretch gap-0">
+        <div className="flex-1 rounded-lg border-2 border-emerald-200 bg-emerald-50/30 p-5 text-center">
+          <Leaf size={28} className="text-emerald-600 mx-auto mb-2"/><p className="text-sm font-bold text-emerald-700">Leaf AgTech</p>
+          <p className="text-xs text-slate-500 mt-1">IoT sensors · Crop data · Nutrient assays</p>
+          <p className="text-xs font-mono font-bold text-emerald-600 mt-2">48 batches · 3 greenhouses · 3 field plots</p>
+        </div>
+        <Arrow/><Arrow/>
+        <div className="flex-1 rounded-lg border-2 border-amber-200 bg-amber-50/30 p-5 text-center">
+          <Apple size={28} className="text-amber-600 mx-auto mb-2"/><p className="text-sm font-bold text-amber-700">Nutrition Hub</p>
+          <p className="text-xs text-slate-500 mt-1">Distribution · Rx fulfillment · Meal tracking</p>
+          <p className="text-xs font-mono font-bold text-amber-600 mt-2">166K meals · 5 sites · 67 patients</p>
+        </div>
+        <Arrow/><Arrow/>
+        <div className="flex-1 rounded-lg border-2 border-blue-200 bg-blue-50/30 p-5 text-center">
+          <Stethoscope size={28} className="text-blue-600 mx-auto mb-2"/><p className="text-sm font-bold text-blue-700">Epic FHIR R4</p>
+          <p className="text-xs text-slate-500 mt-1">Labs · Vitals · Diagnoses · Medications</p>
+          <p className="text-xs font-mono font-bold text-blue-600 mt-2">4,847 records · SMART on FHIR · HL7v2</p>
+        </div>
+      </div>
+      <div className="mt-4 text-center"><p className="text-xs text-slate-400">All data flows encrypted via TLS 1.3 · HIPAA BAA in place · SOC 2 Type II compliant</p></div>
+    </div>
+  </div>
+);
+
+// ══════════════════════════════════════════
+// SETTINGS VIEW
+// ══════════════════════════════════════════
+const SettingsView = () => {
+  const [tab,setTab] = useState(0);
+  return (
+  <div className="max-w-7xl space-y-6">
+    <div><h2 className="text-lg font-bold text-slate-900">Platform Settings</h2><p className="text-sm text-slate-500">Alerts, report schedules, user management, and audit log</p></div>
+    <Tab labels={["Alert Thresholds","Report Schedules","User Management","Audit Log"]} active={tab} set={setTab}/>
+
+    {tab===0 && (
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <Sect>Clinical Alert Thresholds</Sect>
+        <p className="text-xs text-slate-400 mb-5">Alerts trigger when patient metrics cross these thresholds. Notifications sent to assigned clinicians.</p>
+        <div className="space-y-5">
+          {[
+            {label:"A1C Alert",val:"≥ 7.0%",desc:"Alert when patient A1C rises above target",status:"Active",recipients:"Clinical team"},
+            {label:"Systolic BP Alert",val:"≥ 140 mmHg",desc:"Alert for elevated systolic blood pressure",status:"Active",recipients:"Clinical team"},
+            {label:"Adherence Warning",val:"< 70%",desc:"Warning when food Rx adherence drops below threshold",status:"Active",recipients:"Program director + Clinical"},
+            {label:"eGFR Declining",val:"Δ > -5 mL/min/6mo",desc:"Alert for CKD patients with declining renal function",status:"Active",recipients:"Nephrologist + Clinical lead"},
+            {label:"Weight Gain Alert",val:"> 5 lbs/month",desc:"Alert for rapid weight gain indicating fluid retention or non-adherence",status:"Active",recipients:"Clinical team"},
+            {label:"Batch Nutrient Drop",val:"Score < 75",desc:"Flag batches with below-threshold nutrient density scores",status:"Active",recipients:"Ag operations + Research"},
+          ].map((a,i)=>(
+            <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-all">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-red-50 border border-red-200 flex items-center justify-center"><AlertTriangle size={18} className="text-red-500"/></div>
+                <div><p className="font-semibold text-slate-900 text-sm">{a.label}: <span className="font-mono text-emerald-600">{a.val}</span></p><p className="text-xs text-slate-400 mt-0.5">{a.desc}</p></div>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-slate-400">{a.recipients}</span>
+                <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500"/>{a.status}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {tab===1 && (
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <Sect>Scheduled Reports</Sect>
+        <p className="text-xs text-slate-400 mb-5">Automated report generation and distribution</p>
+        <div className="space-y-3">
+          {[
+            {name:"Monthly Program Report",freq:"1st of each month, 6:00 AM",next:"Mar 1, 2026",to:"Jamal Harrison, Dr. Chen, Dr. Williams",status:"Scheduled"},
+            {name:"Quarterly Clinical Outcomes",freq:"End of quarter, 8:00 AM",next:"Mar 31, 2026",to:"All clinical staff, Research team",status:"Scheduled"},
+            {name:"Cost-Benefit Analysis",freq:"End of quarter, 8:00 AM",next:"Mar 31, 2026",to:"Jamal Harrison, IU Health Finance",status:"Scheduled"},
+            {name:"Weekly Adherence Summary",freq:"Every Monday, 7:00 AM",next:"Feb 17, 2026",to:"Clinical team",status:"Scheduled"},
+            {name:"Daily Hub Distribution",freq:"Daily, 11:00 PM",next:"Tonight",to:"Hub site managers",status:"Scheduled"},
+          ].map((r,i)=>(
+            <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center"><Calendar size={18} className="text-sky-500"/></div>
+                <div><p className="font-semibold text-slate-900 text-sm">{r.name}</p><p className="text-xs text-slate-400 mt-0.5">{r.freq}</p></div>
+              </div>
+              <div className="flex items-center gap-6 text-xs">
+                <div className="text-right"><p className="text-slate-400">Next Run</p><p className="font-semibold text-slate-700">{r.next}</p></div>
+                <div className="text-right max-w-[200px]"><p className="text-slate-400">Recipients</p><p className="font-semibold text-slate-700 truncate">{r.to}</p></div>
+                <span className="flex items-center gap-1 text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1"><Clock size={10}/>{r.status}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {tab===2 && (
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-5"><Sect>User Management</Sect><button className="flex items-center gap-1.5 bg-emerald-600 text-white rounded-lg px-4 py-2 text-xs font-semibold hover:bg-emerald-700 transition-colors"><UserCog size={14}/>Invite User</button></div>
+        <table className="w-full text-sm">
+          <thead><tr className="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider border-b border-gray-200">
+            <th className="text-left px-5 py-3 font-semibold">User</th><th className="text-left px-3 py-3 font-semibold">Role</th>
+            <th className="text-left px-3 py-3 font-semibold">Access Level</th><th className="text-left px-3 py-3 font-semibold">Last Active</th>
+            <th className="text-center px-3 py-3 font-semibold">Status</th>
+          </tr></thead>
+          <tbody>{ADMIN_USERS.map((u,i)=>(
+            <tr key={i} className={`border-b border-gray-50 ${i%2?"bg-slate-50/40":""}`}>
+              <td className="px-5 py-3.5"><p className="font-semibold text-slate-900">{u.name}</p><p className="text-xs text-slate-400">{u.email}</p></td>
+              <td className="px-3 py-3.5 text-xs text-slate-600 font-medium">{u.role}</td>
+              <td className="px-3 py-3.5"><span className="text-xs bg-slate-100 text-slate-600 rounded px-2 py-0.5 font-medium">{u.access}</span></td>
+              <td className="px-3 py-3.5 text-xs text-slate-500">{u.last}</td>
+              <td className="px-3 py-3.5 text-center"><span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500"/>Active</span></td>
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
+    )}
+
+    {tab===3 && (
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-5"><Sect>System Audit Log</Sect><span className="text-xs text-slate-400">Showing last 10 events · <button className="text-emerald-600 font-semibold hover:underline">Export full log</button></span></div>
+        <table className="w-full text-sm">
+          <thead><tr className="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider border-b border-gray-200">
+            <th className="text-left px-5 py-3 font-semibold">Time</th><th className="text-left px-3 py-3 font-semibold">User</th>
+            <th className="text-left px-3 py-3 font-semibold">Action</th><th className="text-left px-3 py-3 font-semibold">Detail</th>
+          </tr></thead>
+          <tbody>{AUDIT.map((a,i)=>(
+            <tr key={i} className={`border-b border-gray-50 ${i%2?"bg-slate-50/40":""}`}>
+              <td className="px-5 py-3 text-xs text-slate-400 font-mono whitespace-nowrap">{a.time}</td>
+              <td className="px-3 py-3 text-xs font-semibold text-slate-700">{a.user}</td>
+              <td className="px-3 py-3 text-xs text-slate-600">{a.action}</td>
+              <td className="px-3 py-3 text-xs text-slate-500">{a.detail}</td>
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
+    )}
+  </div>
+  );
+};
+
+// ══════════════════════════════════════════
+// REPORTS VIEW
+// ══════════════════════════════════════════
+const ReportsView = () => {
+  const [generating,setGenerating] = useState(null);
+  const [ready,setReady] = useState({});
+  const generate = (id) => { setGenerating(id); setTimeout(()=>{setGenerating(null);setReady(r=>({...r,[id]:true}));},2500); };
+  return (
+  <div className="max-w-7xl space-y-6">
+    <div className="flex items-center justify-between">
+      <div><h2 className="text-lg font-bold text-slate-900">Report Generator</h2><p className="text-sm text-slate-500">Generate, schedule, and download program reports</p></div>
+      <span className="text-xs text-slate-400 flex items-center gap-1.5"><ShieldCheck size={12} className="text-emerald-500"/>All reports auto-apply HIPAA Safe Harbor de-identification</span>
+    </div>
+    <div className="grid grid-cols-3 gap-5">
+      {RPT_TEMPLATES.map(t=>{const I=t.Icon; return(
+        <div key={t.id} className={`bg-white rounded-xl border-2 ${t.color} p-5 hover:shadow-md transition-all`}>
+          <div className="flex items-center gap-3 mb-3"><div className="w-10 h-10 rounded-lg bg-white border border-gray-200 flex items-center justify-center shadow-sm"><I size={20} className="text-slate-600"/></div><div><p className="font-bold text-slate-900 text-sm">{t.name}</p><p className="text-xs text-slate-500 font-mono">{t.pages} pages</p></div></div>
+          <p className="text-xs text-slate-600 leading-relaxed mb-3">{t.desc}</p>
+          <div className="flex flex-wrap gap-1 mb-3">{t.tags.map(tg=><span key={tg} className="text-xs bg-slate-100 text-slate-500 rounded px-1.5 py-0.5 font-medium">{tg}</span>)}</div>
+          <div className="flex items-center justify-between text-xs text-slate-400 mb-3"><span>Frequency: {t.freq}</span><span>Last: {t.last}</span></div>
+          {generating===t.id ? (
+            <div className="flex items-center justify-center gap-2 bg-amber-50 border border-amber-200 rounded-lg py-2.5"><RefreshCw size={14} className="text-amber-500 animate-spin"/><span className="text-xs font-semibold text-amber-600">Generating report...</span></div>
+          ) : ready[t.id] ? (
+            <button className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white rounded-lg py-2.5 text-xs font-semibold hover:bg-emerald-700 transition-colors"><Download size={14}/>Download Report</button>
+          ) : (
+            <button onClick={()=>generate(t.id)} className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-lg py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm"><Play size={14}/>Generate Report</button>
+          )}
+        </div>
+      );})}
+    </div>
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100"><h3 className="text-sm font-bold text-slate-900">Recent Reports</h3><span className="text-xs text-slate-400">{RECENT_RPTS.length} reports generated</span></div>
+      <table className="w-full text-sm">
+        <thead><tr className="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider">
+          <th className="text-left px-6 py-3 font-semibold">Report</th><th className="text-left px-3 py-3 font-semibold">Generated</th>
+          <th className="text-center px-3 py-3 font-semibold">Pages</th><th className="text-center px-3 py-3 font-semibold">Size</th>
+          <th className="text-left px-3 py-3 font-semibold">Generated By</th><th className="w-20 py-3"/>
+        </tr></thead>
+        <tbody>{RECENT_RPTS.map((r,i)=>(
+          <tr key={i} className={`border-b border-gray-50 ${i%2?"bg-slate-50/40":""}`}>
+            <td className="px-6 py-3.5 font-semibold text-slate-900 text-xs">{r.name}</td>
+            <td className="px-3 py-3.5 text-xs text-slate-500">{r.gen}</td>
+            <td className="px-3 py-3.5 text-xs text-slate-700 text-center font-semibold">{r.pages}</td>
+            <td className="px-3 py-3.5 text-xs text-slate-500 text-center">{r.size}</td>
+            <td className="px-3 py-3.5 text-xs text-slate-500">{r.by}</td>
+            <td className="pr-4 py-3.5"><button className="flex items-center gap-1 text-xs text-emerald-600 font-semibold hover:underline"><Download size={12}/>PDF</button></td>
+          </tr>
+        ))}</tbody>
+      </table>
+    </div>
+  </div>
+  );
+};
+
+// ══════════════════════════════════════════
 // MAIN APP SHELL
 // ══════════════════════════════════════════
-const NAV_MAIN = [{key:"dashboard",label:"Dashboard",Icon:Home},{key:"patients",label:"Patients",Icon:Users},{key:"crops",label:"Crops & Batches",Icon:Sprout},{key:"research",label:"Research",Icon:FlaskConical}];
+const NAV_MAIN = [{key:"dashboard",label:"Dashboard",Icon:Home},{key:"patients",label:"Patients",Icon:Users},{key:"crops",label:"Crops & Batches",Icon:Sprout},{key:"research",label:"Research",Icon:FlaskConical},{key:"reports",label:"Reports",Icon:FileBarChart}];
 const NAV_SYS = [{key:"integrations",label:"Integrations",Icon:Zap},{key:"settings",label:"Settings",Icon:Settings}];
 
 export default function PhytivApp() {
   const [view,setView] = useState("dashboard");
   const [patient,setPatient] = useState(null);
   const [batch,setBatch] = useState(null);
+  const [showNotifs,setShowNotifs] = useState(false);
+  const [headerSearch,setHeaderSearch] = useState("");
+  const [showSearch,setShowSearch] = useState(false);
 
-  const goTo = (v,p=null,b=null) => { setView(v); if(p)setPatient(p); if(b)setBatch(b); window.scrollTo(0,0); };
+  const goTo = (v,p=null,b=null) => { setView(v); if(p)setPatient(p); if(b)setBatch(b); window.scrollTo(0,0); setShowNotifs(false); setShowSearch(false); };
   const goBack = () => { if(view==="patient-detail")setView("patients"); else if(view==="crop-detail")setView("crops"); else setView("dashboard"); window.scrollTo(0,0); };
-  const navKey = view.startsWith("patient")?"patients":view.startsWith("crop")?"crops":view==="research"?"research":"dashboard";
+  const navKey = view.startsWith("patient")?"patients":view.startsWith("crop")?"crops":view==="research"?"research":view==="reports"?"reports":view==="integrations"?"integrations":view==="settings"?"settings":"dashboard";
 
   return (
     <div className="flex min-h-screen bg-slate-50" style={{fontFamily:"'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"}}>
@@ -1010,7 +1319,7 @@ export default function PhytivApp() {
       <aside className="w-64 flex flex-col flex-shrink-0 bg-slate-900" style={{minHeight:"100vh"}}>
         <div className="p-5 flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-md"><Leaf size={20} className="text-white"/></div>
-          <div><p className="text-white font-bold text-lg tracking-tight">Phytiv</p><p className="text-slate-500 text-xs font-medium -mt-0.5">Intelligence Platform</p></div>
+          <div><p className="text-white font-bold text-lg tracking-tight">Phytiv</p><p className="text-slate-500 text-xs font-medium -mt-0.5">Food-As-Medicine Intelligence</p></div>
         </div>
         <div className="mx-4 mb-4 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
           <p className="text-amber-400 text-xs font-semibold text-center tracking-wide">DEMO ENVIRONMENT</p>
@@ -1027,7 +1336,10 @@ export default function PhytivApp() {
         <div className="px-3 mt-4">
           <p className="text-slate-600 text-xs font-semibold uppercase tracking-widest px-3 mb-2">System</p>
           {NAV_SYS.map(n=>(
-            <button key={n.key} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-800/60 hover:text-slate-300 transition-all mb-0.5"><n.Icon size={18}/>{n.label}</button>
+            <button key={n.key} onClick={()=>setView(n.key)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all mb-0.5 ${navKey===n.key?"bg-slate-800 text-white shadow-sm":"text-slate-500 hover:bg-slate-800/60 hover:text-slate-300"}`}>
+              <n.Icon size={18}/>{n.label}
+              {navKey===n.key && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400"/>}
+            </button>
           ))}
         </div>
         <div className="px-3 mt-auto pt-4">
@@ -1059,8 +1371,45 @@ export default function PhytivApp() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-xs text-slate-400"><RefreshCw size={12}/>Last synced 2 min ago</div>
             <div className="w-px h-5 bg-gray-200"/>
-            <div className="flex items-center gap-2 bg-slate-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-slate-400 hover:border-slate-300 transition-colors cursor-text"><Search size={14}/><span className="text-xs">Search...</span></div>
-            <button className="relative hover:bg-slate-50 p-1.5 rounded-lg transition-colors"><Bell size={18} className="text-slate-400"/><span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"/></button>
+            {/* Search bar */}
+            <div className="relative">
+              {showSearch ? (
+                <div className="flex items-center gap-2 bg-white border border-emerald-400 rounded-lg px-3 py-1.5 text-sm shadow-sm">
+                  <Search size={14} className="text-emerald-500"/>
+                  <input autoFocus value={headerSearch} onChange={e=>setHeaderSearch(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&headerSearch.trim()){setShowSearch(false);setHeaderSearch("");goTo("patients");}if(e.key==="Escape"){setShowSearch(false);setHeaderSearch("");}}} placeholder="Search patients, batches, reports..." className="text-xs w-56 outline-none bg-transparent text-slate-700 placeholder:text-slate-400"/>
+                  <button onClick={()=>{setShowSearch(false);setHeaderSearch("");}} className="text-slate-400 hover:text-slate-600"><X size={14}/></button>
+                </div>
+              ) : (
+                <button onClick={()=>setShowSearch(true)} className="flex items-center gap-2 bg-slate-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-slate-400 hover:border-slate-300 transition-colors cursor-text"><Search size={14}/><span className="text-xs">Search...</span><kbd className="ml-2 text-[10px] bg-white border border-gray-200 rounded px-1 py-0.5 text-slate-400">/</kbd></button>
+              )}
+            </div>
+            {/* Notification bell + panel */}
+            <div className="relative">
+              <button onClick={()=>setShowNotifs(!showNotifs)} className="relative hover:bg-slate-50 p-1.5 rounded-lg transition-colors"><Bell size={18} className={showNotifs?"text-emerald-600":"text-slate-400"}/><span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"/></button>
+              {showNotifs && (
+                <div className="absolute right-0 top-10 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
+                  <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between bg-slate-50">
+                    <p className="text-sm font-bold text-slate-800">Notifications</p>
+                    <span className="bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full px-2 py-0.5">{NOTIFS.length} new</span>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto divide-y divide-gray-50">
+                    {NOTIFS.map((n,i)=>{const NI=NOTIF_ICON[n.type];return(
+                      <div key={i} className="px-4 py-3 hover:bg-slate-50 transition-colors cursor-pointer flex gap-3">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${NOTIF_COLOR[n.type]}`}><NI size={14}/></div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-semibold text-slate-800 leading-snug">{n.title}</p>
+                          <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{n.desc}</p>
+                          <p className="text-[10px] text-slate-400 mt-1 font-medium">{n.time}</p>
+                        </div>
+                      </div>
+                    );})}
+                  </div>
+                  <div className="px-4 py-2.5 border-t border-gray-100 bg-slate-50">
+                    <button className="text-xs text-emerald-600 font-semibold hover:text-emerald-700 w-full text-center">View all notifications</button>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">JH</div>
           </div>
         </header>
@@ -1072,6 +1421,9 @@ export default function PhytivApp() {
           {view==="crops" && <CropList goTo={goTo}/>}
           {view==="crop-detail" && batch && <CropDetail b={batch} goTo={goTo} goBack={goBack}/>}
           {view==="research" && <ResearchView/>}
+          {view==="reports" && <ReportsView/>}
+          {view==="integrations" && <IntegrationsView/>}
+          {view==="settings" && <SettingsView/>}
         </div>
 
         <footer className="h-11 bg-white border-t border-gray-100 flex items-center justify-between px-6 flex-shrink-0">
