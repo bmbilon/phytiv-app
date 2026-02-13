@@ -37,32 +37,32 @@ const STATUS = {
 
 // ── Mock Data ──────────────────────────────────────────────────────
 const PATIENTS = [
-  { id:"P-10847",name:"Maria Santos",age:58,g:"F",conds:["Type 2 Diabetes","Hypertension"],dr:"Dr. Sarah Chen",fac:"IU Health Methodist",enr:"Sep 15, 2025",status:"improving",
+  { id:"P-10847",name:"Maria Santos",age:58,g:"F",conds:["Type 2 Diabetes","Hypertension"],dr:"Dr. Priya Kapoor",fac:"IU Health Methodist",enr:"Sep 15, 2025",status:"improving",
     a1c:{c:6.8,b:8.4,t:7.0},bp:{c:"128/82",cs:128,b:"152/96",bs:152,t:"130/80"},bmi:{c:29.1,b:32.4,t:25.0},
     trend:[{m:"Sep '25",a1c:8.4,bp:152,wt:204},{m:"Oct",a1c:8.1,bp:148,wt:200},{m:"Nov",a1c:7.6,bp:140,wt:195},{m:"Dec",a1c:7.2,bp:134,wt:190},{m:"Jan '26",a1c:6.8,bp:128,wt:186}],
     rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:94},{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:87}],
     cost:{mo_b:2840,mo_a:1920,er_b:4,er_a:1,meds_b:6,meds_a:4}},
-  { id:"P-10923",name:"James Wilson",age:64,g:"M",conds:["Hypertension","Hyperlipidemia"],dr:"Dr. Michael Torres",fac:"IU Health University",enr:"Oct 2, 2025",status:"improving",
+  { id:"P-10923",name:"James Wilson",age:64,g:"M",conds:["Hypertension","Hyperlipidemia"],dr:"Dr. Nathan Okafor",fac:"IU Health University",enr:"Oct 2, 2025",status:"improving",
     a1c:{c:5.9,b:6.1,t:5.7},bp:{c:"132/84",cs:132,b:"158/98",bs:158,t:"130/80"},bmi:{c:27.8,b:28.5,t:25.0},
     trend:[{m:"Oct '25",a1c:6.1,bp:158,wt:212},{m:"Nov",a1c:6.0,bp:150,wt:208},{m:"Dec",a1c:5.9,bp:142,wt:205},{m:"Jan '26",a1c:5.9,bp:136,wt:202},{m:"Feb",a1c:5.9,bp:132,wt:200}],
     rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"4 lbs/wk",batch:"SP-2026-0203",adh:91},{food:"Duke Blueberry",cat:"Berries",qty:"1.5 lbs/wk",batch:"BB-2026-0178",adh:78}],
     cost:{mo_b:2200,mo_a:1680,er_b:3,er_a:1,meds_b:5,meds_a:3}},
-  { id:"P-11056",name:"Keisha Brown",age:45,g:"F",conds:["Pre-diabetes","Obesity"],dr:"Dr. Sarah Chen",fac:"Eskenazi Health",enr:"Nov 10, 2025",status:"stable",
+  { id:"P-11056",name:"Keisha Brown",age:45,g:"F",conds:["Pre-diabetes","Obesity"],dr:"Dr. Priya Kapoor",fac:"Eskenazi Health",enr:"Nov 10, 2025",status:"stable",
     a1c:{c:5.8,b:6.3,t:5.7},bp:{c:"124/78",cs:124,b:"138/88",bs:138,t:"120/80"},bmi:{c:33.2,b:35.8,t:30.0},
     trend:[{m:"Nov '25",a1c:6.3,bp:138,wt:232},{m:"Dec",a1c:6.1,bp:132,wt:226},{m:"Jan '26",a1c:5.9,bp:128,wt:220},{m:"Feb",a1c:5.8,bp:124,wt:216}],
     rxs:[{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2.5 lbs/wk",batch:"BR-2026-0134",adh:82},{food:"Green Lentils",cat:"Legumes",qty:"2 lbs/wk",batch:"LN-2026-0091",adh:75}],
     cost:{mo_b:1960,mo_a:1480,er_b:2,er_a:1,meds_b:4,meds_a:3}},
-  { id:"P-11102",name:"Robert Chen",age:72,g:"M",conds:["Coronary Artery Disease","Type 2 Diabetes"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Aug 20, 2025",status:"improving",
+  { id:"P-11102",name:"Robert Chen",age:72,g:"M",conds:["Coronary Artery Disease","Type 2 Diabetes"],dr:"Dr. Elena Vasquez",fac:"IU Health Methodist",enr:"Aug 20, 2025",status:"improving",
     a1c:{c:7.1,b:9.2,t:7.0},bp:{c:"126/78",cs:126,b:"144/92",bs:144,t:"130/80"},bmi:{c:26.3,b:28.1,t:25.0},
     trend:[{m:"Aug '25",a1c:9.2,bp:144,wt:198},{m:"Sep",a1c:8.6,bp:140,wt:194},{m:"Oct",a1c:8.0,bp:136,wt:190},{m:"Nov",a1c:7.5,bp:132,wt:187},{m:"Dec",a1c:7.3,bp:128,wt:184},{m:"Jan '26",a1c:7.1,bp:126,wt:182}],
     rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"KL-2026-0147",adh:96},{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"SW-2026-0156",adh:89},{food:"Duke Blueberry",cat:"Berries",qty:"1 lb/wk",batch:"BB-2026-0178",adh:92}],
     cost:{mo_b:3600,mo_a:2280,er_b:5,er_a:1,meds_b:8,meds_a:5}},
-  { id:"P-11234",name:"Lisa Thompson",age:38,g:"F",conds:["Gestational Diabetes"],dr:"Dr. Michael Torres",fac:"IU Health University",enr:"Dec 1, 2025",status:"monitoring",
+  { id:"P-11234",name:"Lisa Thompson",age:38,g:"F",conds:["Gestational Diabetes"],dr:"Dr. Nathan Okafor",fac:"IU Health University",enr:"Dec 1, 2025",status:"monitoring",
     a1c:{c:5.6,b:6.0,t:5.5},bp:{c:"118/74",cs:118,b:"126/82",bs:126,t:"120/80"},bmi:{c:28.5,b:29.2,t:27.0},
     trend:[{m:"Dec '25",a1c:6.0,bp:126,wt:182},{m:"Jan '26",a1c:5.8,bp:122,wt:180},{m:"Feb",a1c:5.6,bp:118,wt:178}],
     rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:88},{food:"Green Lentils",cat:"Legumes",qty:"1.5 lbs/wk",batch:"LN-2026-0091",adh:71}],
     cost:{mo_b:1800,mo_a:1440,er_b:2,er_a:0,meds_b:3,meds_a:2}},
-  { id:"P-11301",name:"DeShawn Williams",age:52,g:"M",conds:["Type 2 Diabetes","Obesity"],dr:"Dr. Rachel Kim",fac:"IU Health North",enr:"Sep 28, 2025",status:"improving",
+  { id:"P-11301",name:"DeShawn Williams",age:52,g:"M",conds:["Type 2 Diabetes","Obesity"],dr:"Dr. Sasha Lin",fac:"IU Health North",enr:"Sep 28, 2025",status:"improving",
     a1c:{c:7.0,b:8.8,t:7.0},bp:{c:"130/84",cs:130,b:"146/94",bs:146,t:"130/80"},bmi:{c:31.2,b:34.6,t:28.0},
     trend:[{m:"Sep '25",a1c:8.8,bp:146,wt:248},{m:"Oct",a1c:8.4,bp:142,wt:242},{m:"Nov",a1c:7.8,bp:138,wt:236},{m:"Dec",a1c:7.4,bp:134,wt:230},{m:"Jan '26",a1c:7.0,bp:130,wt:225}],
     rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:91},{food:"Cherry Tomato",cat:"Fruiting",qty:"2 lbs/wk",batch:"CT-2026-0210",adh:85}],
@@ -72,17 +72,17 @@ const PATIENTS = [
     trend:[{m:"Oct '25",a1c:6.4,bp:140,wt:196},{m:"Nov",a1c:6.2,bp:136,wt:192},{m:"Dec",a1c:6.0,bp:130,wt:188},{m:"Jan '26",a1c:5.9,bp:126,wt:185}],
     rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"SP-2026-0203",adh:89},{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2 lbs/wk",batch:"BR-2026-0134",adh:82}],
     cost:{mo_b:2100,mo_a:1580,er_b:2,er_a:0,meds_b:4,meds_a:2}},
-  { id:"P-11402",name:"Carlos Rodriguez",age:67,g:"M",conds:["CKD Stage 2","Hypertension"],dr:"Dr. Sarah Chen",fac:"Eskenazi Health",enr:"Nov 5, 2025",status:"monitoring",
+  { id:"P-11402",name:"Carlos Rodriguez",age:67,g:"M",conds:["CKD Stage 2","Hypertension"],dr:"Dr. Priya Kapoor",fac:"Eskenazi Health",enr:"Nov 5, 2025",status:"monitoring",
     a1c:{c:6.2,b:6.8,t:6.0},bp:{c:"134/86",cs:134,b:"156/98",bs:156,t:"130/80"},bmi:{c:27.4,b:28.8,t:25.0},
     trend:[{m:"Nov '25",a1c:6.8,bp:156,wt:210},{m:"Dec",a1c:6.5,bp:148,wt:206},{m:"Jan '26",a1c:6.2,bp:140,wt:202},{m:"Feb",a1c:6.2,bp:134,wt:200}],
     rxs:[{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:80},{food:"Rainbow Chard",cat:"Leafy Greens",qty:"2.5 lbs/wk",batch:"RC-2026-0167",adh:76}],
     cost:{mo_b:4200,mo_a:3100,er_b:5,er_a:2,meds_b:9,meds_a:7}},
-  { id:"P-11478",name:"Sarah Mitchell",age:55,g:"F",conds:["Type 2 Diabetes","Hyperlipidemia"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Aug 10, 2025",status:"improving",
+  { id:"P-11478",name:"Sarah Mitchell",age:55,g:"F",conds:["Type 2 Diabetes","Hyperlipidemia"],dr:"Dr. Elena Vasquez",fac:"IU Health Methodist",enr:"Aug 10, 2025",status:"improving",
     a1c:{c:6.6,b:8.6,t:7.0},bp:{c:"124/78",cs:124,b:"142/88",bs:142,t:"130/80"},bmi:{c:26.8,b:29.4,t:25.0},
     trend:[{m:"Aug '25",a1c:8.6,bp:142,wt:192},{m:"Sep",a1c:8.0,bp:138,wt:188},{m:"Oct",a1c:7.5,bp:134,wt:184},{m:"Nov",a1c:7.0,bp:130,wt:180},{m:"Dec",a1c:6.8,bp:126,wt:176},{m:"Jan '26",a1c:6.6,bp:124,wt:174}],
     rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:95},{food:"Duke Blueberry",cat:"Berries",qty:"1.5 lbs/wk",batch:"BB-2026-0178",adh:90}],
     cost:{mo_b:2960,mo_a:1840,er_b:3,er_a:0,meds_b:6,meds_a:3}},
-  { id:"P-11534",name:"Anthony Davis",age:48,g:"M",conds:["Hypertension","Obesity"],dr:"Dr. Rachel Kim",fac:"IU Health West",enr:"Oct 22, 2025",status:"stable",
+  { id:"P-11534",name:"Anthony Davis",age:48,g:"M",conds:["Hypertension","Obesity"],dr:"Dr. Sasha Lin",fac:"IU Health West",enr:"Oct 22, 2025",status:"stable",
     a1c:{c:5.7,b:5.9,t:5.7},bp:{c:"136/86",cs:136,b:"152/96",bs:152,t:"130/80"},bmi:{c:33.8,b:36.2,t:30.0},
     trend:[{m:"Oct '25",a1c:5.9,bp:152,wt:264},{m:"Nov",a1c:5.8,bp:148,wt:258},{m:"Dec",a1c:5.8,bp:142,wt:252},{m:"Jan '26",a1c:5.7,bp:136,wt:248}],
     rxs:[{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2.5 lbs/wk",batch:"SW-2026-0156",adh:84},{food:"Green Lentils",cat:"Legumes",qty:"2 lbs/wk",batch:"LN-2026-0091",adh:79}],
@@ -92,17 +92,17 @@ const PATIENTS = [
     trend:[{m:"Sep '25",a1c:8.7,bp:150,wt:168},{m:"Oct",a1c:8.2,bp:144,wt:164},{m:"Nov",a1c:7.6,bp:138,wt:160},{m:"Dec",a1c:7.2,bp:134,wt:156},{m:"Jan '26",a1c:6.9,bp:128,wt:154}],
     rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:93},{food:"Butternut Squash",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BS-2026-0195",adh:86}],
     cost:{mo_b:3100,mo_a:1960,er_b:4,er_a:1,meds_b:7,meds_a:4}},
-  { id:"P-11623",name:"Marcus Johnson",age:44,g:"M",conds:["Pre-diabetes","Obesity"],dr:"Dr. Michael Torres",fac:"Eskenazi Health",enr:"Nov 18, 2025",status:"stable",
+  { id:"P-11623",name:"Marcus Johnson",age:44,g:"M",conds:["Pre-diabetes","Obesity"],dr:"Dr. Nathan Okafor",fac:"Eskenazi Health",enr:"Nov 18, 2025",status:"stable",
     a1c:{c:5.9,b:6.2,t:5.7},bp:{c:"130/82",cs:130,b:"142/88",bs:142,t:"130/80"},bmi:{c:34.6,b:37.0,t:30.0},
     trend:[{m:"Nov '25",a1c:6.2,bp:142,wt:268},{m:"Dec",a1c:6.1,bp:138,wt:262},{m:"Jan '26",a1c:5.9,bp:134,wt:256},{m:"Feb",a1c:5.9,bp:130,wt:252}],
     rxs:[{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2.5 lbs/wk",batch:"BR-2026-0134",adh:77},{food:"Cherry Tomato",cat:"Fruiting",qty:"2 lbs/wk",batch:"CT-2026-0210",adh:73}],
     cost:{mo_b:1680,mo_a:1280,er_b:2,er_a:1,meds_b:3,meds_a:2}},
-  { id:"P-11687",name:"Diana Petrov",age:71,g:"F",conds:["Heart Failure","Type 2 Diabetes"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Jul 15, 2025",status:"improving",
+  { id:"P-11687",name:"Diana Petrov",age:71,g:"F",conds:["Heart Failure","Type 2 Diabetes"],dr:"Dr. Elena Vasquez",fac:"IU Health Methodist",enr:"Jul 15, 2025",status:"improving",
     a1c:{c:7.0,b:9.4,t:7.0},bp:{c:"122/76",cs:122,b:"148/92",bs:148,t:"130/80"},bmi:{c:25.4,b:27.6,t:24.0},
     trend:[{m:"Jul '25",a1c:9.4,bp:148,wt:174},{m:"Aug",a1c:8.8,bp:142,wt:170},{m:"Sep",a1c:8.2,bp:138,wt:166},{m:"Oct",a1c:7.6,bp:132,wt:162},{m:"Nov",a1c:7.3,bp:128,wt:158},{m:"Dec",a1c:7.1,bp:124,wt:156},{m:"Jan '26",a1c:7.0,bp:122,wt:154}],
     rxs:[{food:"Rainbow Chard",cat:"Leafy Greens",qty:"2.5 lbs/wk",batch:"RC-2026-0167",adh:94},{food:"Duke Blueberry",cat:"Berries",qty:"1 lb/wk",batch:"BB-2026-0178",adh:91},{food:"Green Lentils",cat:"Legumes",qty:"1.5 lbs/wk",batch:"LN-2026-0091",adh:85}],
     cost:{mo_b:5200,mo_a:3400,er_b:6,er_a:2,meds_b:10,meds_a:7}},
-  { id:"P-11742",name:"Terrance Howard",age:36,g:"M",conds:["Obesity","Hypertension"],dr:"Dr. Rachel Kim",fac:"Community Health East",enr:"Dec 10, 2025",status:"monitoring",
+  { id:"P-11742",name:"Terrance Howard",age:36,g:"M",conds:["Obesity","Hypertension"],dr:"Dr. Sasha Lin",fac:"Community Health East",enr:"Dec 10, 2025",status:"monitoring",
     a1c:{c:5.5,b:5.7,t:5.5},bp:{c:"138/88",cs:138,b:"148/92",bs:148,t:"130/80"},bmi:{c:36.2,b:38.0,t:30.0},
     trend:[{m:"Dec '25",a1c:5.7,bp:148,wt:286},{m:"Jan '26",a1c:5.6,bp:142,wt:280},{m:"Feb",a1c:5.5,bp:138,wt:276}],
     rxs:[{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"SW-2026-0156",adh:72},{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:68}],
@@ -213,9 +213,9 @@ const RPT_TEMPLATES = [
 ];
 const RECENT_RPTS = [
   {name:"Monthly Program Report — January 2026",gen:"Jan 31, 2026",pages:13,size:"2.4 MB",by:"System (scheduled)"},
-  {name:"Quarterly Clinical Outcomes — Q4 2025",gen:"Dec 31, 2025",pages:21,size:"4.1 MB",by:"Dr. Sarah Chen"},
+  {name:"Quarterly Clinical Outcomes — Q4 2025",gen:"Dec 31, 2025",pages:21,size:"4.1 MB",by:"Dr. Priya Kapoor"},
   {name:"Cost-Benefit Analysis — Q4 2025",gen:"Dec 31, 2025",pages:9,size:"1.8 MB",by:"System (scheduled)"},
-  {name:"Crop Traceability — Batch KL-2026-0147",gen:"Feb 10, 2026",pages:6,size:"1.2 MB",by:"Jamal Harrison"},
+  {name:"Crop Traceability — Batch KL-2026-0147",gen:"Feb 10, 2026",pages:6,size:"1.2 MB",by:"Marcus Devereaux"},
   {name:"Patient Cohort Summary — January 2026",gen:"Jan 31, 2026",pages:15,size:"2.8 MB",by:"System (scheduled)"},
 ];
 
@@ -228,24 +228,24 @@ const INTEG = [
 
 // ── Admin / Audit Data ────────────────────────────────────────────────
 const ADMIN_USERS = [
-  {name:"Jamal Harrison",role:"Program Director",email:"j.harrison@indyhealthdistrict.org",access:"Full Admin",last:"2 min ago",status:"active"},
-  {name:"Dr. Sarah Chen",role:"Clinical Lead",email:"s.chen@iuhealth.org",access:"Clinical + Reports",last:"34 min ago",status:"active"},
-  {name:"Dr. Amanda Williams",role:"Research PI",email:"a.williams@iuhealth.org",access:"Research + Export",last:"Yesterday",status:"active"},
-  {name:"Dr. Michael Torres",role:"Clinical",email:"m.torres@iuhealth.org",access:"Clinical View",last:"Today 9:14 AM",status:"active"},
-  {name:"Rachel Kim",role:"Data Analyst",email:"r.kim@iuhealth.org",access:"Analytics + Reports",last:"Today 8:52 AM",status:"active"},
-  {name:"Brett Bilon",role:"Platform Admin",email:"brett@phytiv.com",access:"Super Admin",last:"Now",status:"active"},
+  {name:"Marcus Devereaux",role:"Program Director",email:"m.devereaux@indyhealthdistrict.org",access:"Full Admin",last:"2 min ago",status:"active"},
+  {name:"Dr. Priya Kapoor",role:"Clinical Lead",email:"p.kapoor@iuhealth.org",access:"Clinical + Reports",last:"34 min ago",status:"active"},
+  {name:"Dr. Elena Vasquez",role:"Research PI",email:"e.vasquez@iuhealth.org",access:"Research + Export",last:"Yesterday",status:"active"},
+  {name:"Dr. Nathan Okafor",role:"Clinical",email:"n.okafor@iuhealth.org",access:"Clinical View",last:"Today 9:14 AM",status:"active"},
+  {name:"Sasha Lin",role:"Data Analyst",email:"s.lin@iuhealth.org",access:"Analytics + Reports",last:"Today 8:52 AM",status:"active"},
+  {name:"Jordan Reeves",role:"Platform Admin",email:"j.reeves@phytiv.com",access:"Super Admin",last:"Now",status:"active"},
 ];
 const AUDIT = [
-  {time:"10:42 AM",user:"Jamal Harrison",action:"Viewed patient detail",detail:"P-10847 (Maria Santos)"},
+  {time:"10:42 AM",user:"Marcus Devereaux",action:"Viewed patient detail",detail:"P-10847 (Maria Santos)"},
   {time:"10:38 AM",user:"System",action:"FHIR sync completed",detail:"12 lab results imported from Epic"},
-  {time:"10:35 AM",user:"Dr. Sarah Chen",action:"Generated report",detail:"Crop Traceability — Batch KL-2026-0147"},
+  {time:"10:35 AM",user:"Dr. Priya Kapoor",action:"Generated report",detail:"Crop Traceability — Batch KL-2026-0147"},
   {time:"10:22 AM",user:"System",action:"Leaf telemetry sync",detail:"Greenhouse A, B, C sensor data updated"},
   {time:"09:58 AM",user:"Admin",action:"Updated alert threshold",detail:"A1C alert changed from 7.5% to 7.0%"},
   {time:"09:45 AM",user:"System",action:"Hub meal distribution sync",detail:"Daily: 312 meals across 5 sites"},
-  {time:"Yesterday 4:30 PM",user:"Dr. Amanda Williams",action:"Exported data",detail:"REDCap — 67 de-identified records"},
+  {time:"Yesterday 4:30 PM",user:"Dr. Elena Vasquez",action:"Exported data",detail:"REDCap — 67 de-identified records"},
   {time:"Yesterday 3:15 PM",user:"System",action:"Scheduled report",detail:"Monthly Program Report (Jan 2026) — 13 pages"},
-  {time:"Yesterday 1:02 PM",user:"Rachel Kim",action:"Ran cohort analysis",detail:"FaM vs Control — p<0.001 confirmed"},
-  {time:"Feb 11, 3:40 PM",user:"Jamal Harrison",action:"Added patient",detail:"P-11742 (Terrance Howard) enrolled in program"},
+  {time:"Yesterday 1:02 PM",user:"Sasha Lin",action:"Ran cohort analysis",detail:"FaM vs Control — p<0.001 confirmed"},
+  {time:"Feb 11, 3:40 PM",user:"Marcus Devereaux",action:"Added patient",detail:"P-11742 (Terrance Howard) enrolled in program"},
 ];
 
 // ── Nutrition Hub Program Data ────────────────────────────────────────
@@ -1174,9 +1174,9 @@ const SettingsView = () => {
         <p className="text-xs text-slate-400 mb-5">Automated report generation and distribution</p>
         <div className="space-y-3">
           {[
-            {name:"Monthly Program Report",freq:"1st of each month, 6:00 AM",next:"Mar 1, 2026",to:"Jamal Harrison, Dr. Chen, Dr. Williams",status:"Scheduled"},
+            {name:"Monthly Program Report",freq:"1st of each month, 6:00 AM",next:"Mar 1, 2026",to:"Marcus Devereaux, Dr. Kapoor, Dr. Vasquez",status:"Scheduled"},
             {name:"Quarterly Clinical Outcomes",freq:"End of quarter, 8:00 AM",next:"Mar 31, 2026",to:"All clinical staff, Research team",status:"Scheduled"},
-            {name:"Cost-Benefit Analysis",freq:"End of quarter, 8:00 AM",next:"Mar 31, 2026",to:"Jamal Harrison, IU Health Finance",status:"Scheduled"},
+            {name:"Cost-Benefit Analysis",freq:"End of quarter, 8:00 AM",next:"Mar 31, 2026",to:"Marcus Devereaux, IU Health Finance",status:"Scheduled"},
             {name:"Weekly Adherence Summary",freq:"Every Monday, 7:00 AM",next:"Feb 17, 2026",to:"Clinical team",status:"Scheduled"},
             {name:"Daily Hub Distribution",freq:"Daily, 11:00 PM",next:"Tonight",to:"Hub site managers",status:"Scheduled"},
           ].map((r,i)=>(
@@ -1410,7 +1410,7 @@ export default function PhytivApp() {
                 </div>
               )}
             </div>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">JH</div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">MD</div>
           </div>
         </header>
 
