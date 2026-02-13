@@ -3,7 +3,7 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, PieChart, Pie, Cell, RadarChart, Radar,
   PolarGrid, PolarAngleAxis, PolarRadiusAxis, AreaChart, Area,
-  ScatterChart, Scatter, ZAxis
+  ScatterChart, Scatter, ZAxis, ComposedChart
 } from "recharts";
 import {
   Activity, Leaf, Users, TrendingUp, Package, Search, ChevronRight,
@@ -186,6 +186,30 @@ const COST_TREND = [
   {m:"Dec",fam:2220,ctrl:3500},{m:"Jan '26",fam:2080,ctrl:3520},{m:"Feb",fam:1960,ctrl:3540},
 ];
 
+// ── Nutrition Hub Program Data ────────────────────────────────────────
+const HUB_INFO = {
+  "P-10847":{hub:"Jan '24",meals:3480},"P-10923":{hub:"Mar '24",meals:3120},
+  "P-11056":{hub:"Apr '24",meals:2880},"P-11102":{hub:"Feb '24",meals:3360},
+  "P-11234":{hub:"Aug '25",meals:1080},"P-11301":{hub:"Mar '24",meals:3240},
+  "P-11345":{hub:"Jun '24",meals:2640},"P-11402":{hub:"May '24",meals:2760},
+  "P-11478":{hub:"Jan '24",meals:3480},"P-11534":{hub:"Jul '24",meals:2520},
+  "P-11589":{hub:"Feb '24",meals:3360},"P-11623":{hub:"Sep '24",meals:2160},
+  "P-11687":{hub:"Jan '24",meals:3480},"P-11742":{hub:"Oct '25",meals:720},
+  "P-11798":{hub:"Mar '24",meals:3240},
+};
+const MEAL_TREND = [
+  {q:"Q1 '24",meals:8200,pts:12},{q:"Q2 '24",meals:14100,pts:22},{q:"Q3 '24",meals:21400,pts:35},
+  {q:"Q4 '24",meals:28600,pts:48},{q:"Q1 '25",meals:32200,pts:55},{q:"Q2 '25",meals:34800,pts:62},
+  {q:"Q3 '25",meals:26700,pts:67},
+];
+const HUB_SITES = [
+  {name:"Hub Central",sub:"Eskenazi Campus",meals:48200,pats:22,zone:"Near Eastside",pct:29},
+  {name:"Hub East",sub:"Community Health",meals:34800,pats:14,zone:"Warren Twp",pct:21},
+  {name:"Hub North",sub:"IU Health North",meals:32400,pats:12,zone:"Meridian-Kessler",pct:20},
+  {name:"Hub West",sub:"IU Health West",meals:28600,pats:10,zone:"Wayne Twp",pct:17},
+  {name:"Hub South",sub:"IU Health Methodist",meals:22000,pats:9,zone:"Downtown",pct:13},
+];
+
 // ── Research Data ────────────────────────────────────────────────────
 const CROP_CORR = [
   {crop:"Lacinato Kale",a1c:1.75,bp:20,n:18,p:0.003,cat:"Leafy Greens"},
@@ -251,17 +275,17 @@ const Arrow = () => <div className="flex items-center justify-center px-1 flex-s
 const DashboardView = ({goTo}) => (
   <div className="space-y-6 max-w-7xl">
     <div className="grid grid-cols-4 gap-5">
-      <KPI label="Enrolled Patients" value="62" sub="across 5 facilities" icon={Users} trend={18} spark={SPARKS.pts} sparkColor="#059669"/>
-      <KPI label="Active Food Rx" value="156" sub="this month" icon={Apple} iconBg="bg-amber-50" iconColor="text-amber-600" trend={14} spark={SPARKS.rx} sparkColor="#D97706"/>
+      <KPI label="Hub Patients" value="67" sub="across 5 hub sites" icon={Users} trend={18} spark={SPARKS.pts} sparkColor="#059669"/>
+      <KPI label="Meals Served" value="166,000" sub="since Jan 2024" icon={Apple} iconBg="bg-amber-50" iconColor="text-amber-600" trend={14} spark={SPARKS.rx} sparkColor="#D97706"/>
       <KPI label="Avg A1C Reduction" value="2.1%" sub="from baseline" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600" trend={24} spark={SPARKS.a1c} sparkColor="#0EA5E9"/>
-      <KPI label="Tracked Batches" value="48" sub="11 active crops" icon={Package} iconBg="bg-violet-50" iconColor="text-violet-600" trend={12} spark={SPARKS.batch} sparkColor="#8B5CF6"/>
+      <KPI label="Annual Cost Savings" value="$384.6K" sub="projected across cohort" icon={Scale} iconBg="bg-emerald-50" iconColor="text-emerald-600" trend={32}/>
     </div>
 
     <div className="grid grid-cols-4 gap-5">
-      <KPI label="Annual Cost Savings" value="$284.6K" sub="projected annualized" icon={TrendingUp} iconBg="bg-emerald-50" iconColor="text-emerald-600" trend={32}/>
-      <KPI label="Per-Patient Savings" value="$4,590" sub="avg annual" icon={Heart} iconBg="bg-rose-50" iconColor="text-rose-600" trend={28}/>
-      <KPI label="ER Visits Avoided" value="146" sub="annualized projection" icon={Activity} iconBg="bg-red-50" iconColor="text-red-600" trend={41}/>
-      <KPI label="Program ROI" value="3.2x" sub="$3.20 returned per $1 invested" icon={Scale} iconBg="bg-amber-50" iconColor="text-amber-600" trend={22}/>
+      <KPI label="Active Food Rx" value="156" sub="this month" icon={Sprout} iconBg="bg-emerald-50" iconColor="text-emerald-600" trend={14}/>
+      <KPI label="Tracked Batches" value="48" sub="11 active crops" icon={Package} iconBg="bg-violet-50" iconColor="text-violet-600" trend={12} spark={SPARKS.batch} sparkColor="#8B5CF6"/>
+      <KPI label="ER Visits Avoided" value="186" sub="annualized projection" icon={Activity} iconBg="bg-red-50" iconColor="text-red-600" trend={41}/>
+      <KPI label="Program ROI" value="3.2x" sub="$3.20 returned per $1 invested" icon={Heart} iconBg="bg-rose-50" iconColor="text-rose-600" trend={22}/>
     </div>
 
     <div className="grid grid-cols-3 gap-5">
@@ -319,11 +343,11 @@ const DashboardView = ({goTo}) => (
       </div>
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h3 className="text-sm font-bold text-slate-900 mb-1">Cost Savings Breakdown</h3>
-        <p className="text-xs text-slate-400 mb-5">Annualized projection across 62 enrolled patients</p>
+        <p className="text-xs text-slate-400 mb-5">Annualized projection across 67 enrolled patients</p>
         <div className="space-y-4">
           {[
-            {label:"ER Visit Avoidance",val:"$141,800",pct:50,color:"bg-red-500",sub:"146 visits avoided × $971 avg cost"},
-            {label:"Medication Reduction",val:"$142,800",pct:50,color:"bg-blue-500",sub:"189 med courses eliminated × $756 avg/year"},
+            {label:"ER Visit Avoidance",val:"$180,600",pct:47,color:"bg-red-500",sub:"186 visits avoided × $971 avg cost"},
+            {label:"Medication Reduction",val:"$142,800",pct:37,color:"bg-blue-500",sub:"189 med courses eliminated × $756 avg/year"},
             {label:"Inpatient Admissions Avoided",val:"$68,400",pct:24,color:"bg-violet-500",sub:"12 admissions avoided × $5,700 avg"},
             {label:"Lab / Monitoring Reduction",val:"$31,600",pct:11,color:"bg-amber-500",sub:"Reduced frequency due to stabilized biomarkers"},
           ].map((s,i)=>(
@@ -340,6 +364,51 @@ const DashboardView = ({goTo}) => (
         <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
           <span className="text-sm font-bold text-slate-900">Total Projected Savings</span>
           <span className="text-xl font-bold text-emerald-600">$384,600<span className="text-xs text-slate-400 font-normal ml-1">/year</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div className="grid grid-cols-3 gap-5">
+      <div className="col-span-2 bg-white rounded-xl border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-5">
+          <div><h3 className="text-sm font-bold text-slate-900">Nutrition Hub — Meal Distribution</h3><p className="text-xs text-slate-400 mt-0.5">Quarterly meals served and patient enrollment growth since program launch</p></div>
+          <div className="flex gap-5 text-xs font-medium">
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-amber-400"/>Meals Served</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>Patients</span>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={240}>
+          <ComposedChart data={MEAL_TREND}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false}/>
+            <XAxis dataKey="q" tick={{fontSize:11,fill:"#94a3b8"}} axisLine={{stroke:"#e2e8f0"}} tickLine={false}/>
+            <YAxis yAxisId="m" tick={{fontSize:11,fill:"#94a3b8"}} axisLine={false} tickLine={false} tickFormatter={(v)=>`${(v/1000).toFixed(0)}K`}/>
+            <YAxis yAxisId="p" orientation="right" domain={[0,80]} tick={{fontSize:11,fill:"#94a3b8"}} axisLine={false} tickLine={false}/>
+            <Tooltip content={<TT/>}/>
+            <Bar yAxisId="m" dataKey="meals" fill="#F59E0B" name="Meals Served" radius={[4,4,0,0]} maxBarSize={48} fillOpacity={0.85}/>
+            <Line yAxisId="p" type="monotone" dataKey="pts" stroke="#059669" strokeWidth={2.5} dot={{r:4,fill:"#059669",strokeWidth:2,stroke:"#fff"}} name="Patients"/>
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 className="text-sm font-bold text-slate-900 mb-1">Hub Distribution Sites</h3>
+        <p className="text-xs text-slate-400 mb-4">67 patients across 5 Indianapolis locations</p>
+        <div className="space-y-3">
+          {HUB_SITES.map((h,i)=>(
+            <div key={i} className="group">
+              <div className="flex items-center justify-between mb-1">
+                <div><span className="text-xs font-semibold text-slate-700">{h.name}</span><span className="text-xs text-slate-400 ml-1.5">{h.sub}</span></div>
+                <span className="text-xs font-bold text-slate-900">{(h.meals/1000).toFixed(1)}K</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex-1"><Pbar v={h.pct*3} color="bg-amber-400"/></div>
+                <span className="text-xs text-slate-400 w-16 text-right">{h.pats} pts &middot; {h.zone}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+          <span className="text-xs font-semibold text-slate-500">Program Total</span>
+          <span className="text-sm font-bold text-amber-600">166,000 meals</span>
         </div>
       </div>
     </div>
@@ -440,7 +509,8 @@ const PatientDetail = ({p,goTo,goBack:back}) => {
           <div>
             <div className="flex items-center gap-3"><h2 className="text-xl font-bold text-slate-900">{p.name}</h2><StatusPill s={p.status}/></div>
             <p className="text-sm text-slate-500 mt-0.5">{p.id} &middot; {p.age}{p.g} &middot; Enrolled {p.enr}</p>
-            <div className="flex items-center gap-3 mt-2.5"><Badge src="epic"/><span className="text-xs text-slate-400">{p.fac} &middot; {p.dr}</span></div>
+            <div className="flex items-center gap-3 mt-2.5"><Badge src="epic"/><Badge src="hub"/><span className="text-xs text-slate-400">{p.fac} &middot; {p.dr}</span></div>
+            {HUB_INFO[p.id] && <p className="text-xs text-amber-600 font-semibold mt-1.5">Hub member since {HUB_INFO[p.id].hub} &middot; {HUB_INFO[p.id].meals.toLocaleString()} meals received</p>}
             <div className="flex gap-1.5 mt-2.5">{p.conds.map(c=><span key={c} className="bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-md px-2.5 py-0.5 font-semibold">{c}</span>)}</div>
           </div>
         </div>
@@ -747,10 +817,10 @@ const ResearchView = () => {
     </div>
 
     <div className="grid grid-cols-4 gap-5">
-      <KPI label="Research Cohort" value="62" sub="enrolled patients" icon={Users} iconBg="bg-violet-50" iconColor="text-violet-600"/>
+      <KPI label="Research Cohort" value="67" sub="enrolled patients · 166K meals" icon={Users} iconBg="bg-violet-50" iconColor="text-violet-600"/>
       <KPI label="Significant Correlations" value="6 / 7" sub="crops at p<0.05" icon={CheckCircle2} iconBg="bg-emerald-50" iconColor="text-emerald-600"/>
-      <KPI label="Avg A1C Reduction" value="1.6%" sub="FaM cohort (n=62)" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600"/>
-      <KPI label="Control Diff" value="1.6%" sub="vs. standard of care (p<0.001)" icon={Activity} iconBg="bg-amber-50" iconColor="text-amber-600"/>
+      <KPI label="Avg A1C Reduction" value="2.1%" sub="FaM cohort (n=67)" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600"/>
+      <KPI label="Control Diff" value="1.8%" sub="vs. standard of care (p<0.001)" icon={Activity} iconBg="bg-amber-50" iconColor="text-amber-600"/>
     </div>
 
     <Tab labels={["Crop Correlations","Cohort Analysis","Nutrient → Outcome","Data Export"]} active={tab} set={setTab}/>
@@ -812,8 +882,8 @@ const ResearchView = () => {
         <div className="flex items-center justify-between mb-5">
           <div><h3 className="text-sm font-bold text-slate-900">FaM Cohort vs. Standard of Care</h3><p className="text-xs text-slate-400 mt-0.5">Average A1C trajectory over 6 months — food-as-medicine cohort vs. matched control</p></div>
           <div className="flex gap-5 text-xs font-medium">
-            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>FaM Cohort (n=62)</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-slate-400"/>Standard Care (n=68)</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>FaM Cohort (n=67)</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-slate-400"/>Standard Care (n=74)</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={320}>
@@ -828,9 +898,9 @@ const ResearchView = () => {
         </ResponsiveContainer>
         <div className="grid grid-cols-3 gap-4 mt-6">
           {[
-            {label:"FaM A1C Change",val:"-1.9%",sub:"8.2% → 6.3%",color:"text-emerald-600"},
-            {label:"Control A1C Change",val:"-0.3%",sub:"8.1% → 7.8%",color:"text-slate-500"},
-            {label:"Between-Group Diff",val:"1.6%",sub:"p < 0.001, 95% CI [1.2, 2.0]",color:"text-emerald-700"},
+            {label:"FaM A1C Change",val:"-2.1%",sub:"8.4% → 6.3% (n=67, 166K meals)",color:"text-emerald-600"},
+            {label:"Control A1C Change",val:"-0.3%",sub:"8.3% → 8.0% (n=74, standard care)",color:"text-slate-500"},
+            {label:"Between-Group Diff",val:"1.8%",sub:"p < 0.001, 95% CI [1.4, 2.2]",color:"text-emerald-700"},
           ].map((s,i)=>(
             <div key={i} className="bg-slate-50 rounded-lg border border-slate-200 p-4">
               <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">{s.label}</p>
@@ -839,7 +909,7 @@ const ResearchView = () => {
             </div>
           ))}
         </div>
-        <p className="text-xs text-slate-400 mt-4 flex items-center gap-1"><AlertCircle size={11}/>Propensity-score matched control cohort from IU Health EMR. ANCOVA adjusted for age, sex, and baseline A1C.</p>
+        <p className="text-xs text-slate-400 mt-4 flex items-center gap-1"><AlertCircle size={11}/>Propensity-score matched control cohort (n=74) from IU Health EMR. ANCOVA adjusted for age, sex, baseline A1C, and meal adherence. 166,000 meals served across 67-patient FaM cohort since Jan 2024.</p>
       </div>
     )}
 
@@ -878,9 +948,9 @@ const ResearchView = () => {
           </div>
           <div className="grid grid-cols-3 gap-4">
             {[
-              {fmt:"REDCap",desc:"XML format compatible with REDCap v14.x. Includes data dictionary, instrument mappings, and repeating event structure.",icon:Database,ext:".xml",rows:"62 records × 94 fields",color:"border-red-200 bg-red-50"},
-              {fmt:"CSV Bundle",desc:"Flat file export with patient outcomes, crop data, nutrient profiles, and cost impact data. UTF-8 encoded, comma-delimited.",icon:FileText,ext:".csv (5 files)",rows:"62 patients, 48 batches, 156 Rx",color:"border-sky-200 bg-sky-50"},
-              {fmt:"SPSS",desc:"Statistical package format with variable labels, value labels, and measurement scales pre-configured. Includes cost variables.",icon:BarChart3,ext:".sav",rows:"62 records × 94 variables",color:"border-violet-200 bg-violet-50"},
+              {fmt:"REDCap",desc:"XML format compatible with REDCap v14.x. Includes data dictionary, instrument mappings, meal history, and repeating event structure.",icon:Database,ext:".xml",rows:"67 records × 108 fields",color:"border-red-200 bg-red-50"},
+              {fmt:"CSV Bundle",desc:"Flat file export with patient outcomes, 166K meal records, crop data, nutrient profiles, and cost impact data. UTF-8 encoded.",icon:FileText,ext:".csv (7 files)",rows:"67 patients, 48 batches, 166K meals",color:"border-sky-200 bg-sky-50"},
+              {fmt:"SPSS",desc:"Statistical package format with variable labels, value labels, and measurement scales. Includes cost and meal frequency variables.",icon:BarChart3,ext:".sav",rows:"67 records × 108 variables",color:"border-violet-200 bg-violet-50"},
             ].map((e,i)=>(
               <div key={i} className={`rounded-xl border-2 p-5 ${e.color} hover:shadow-md transition-all cursor-pointer`}>
                 <div className="flex items-center gap-3 mb-3">
@@ -1005,7 +1075,7 @@ export default function PhytivApp() {
         </div>
 
         <footer className="h-11 bg-white border-t border-gray-100 flex items-center justify-between px-6 flex-shrink-0">
-          <span className="text-xs text-slate-400 font-medium">Phytiv v0.1.0 &middot; Demo Build &middot; IU Health &times; Marion County Health District</span>
+          <span className="text-xs text-slate-400 font-medium">Phytiv v0.1.0 &middot; Demo Build &middot; IU Health &times; Marion County Health District &middot; 67 patients &middot; 166K meals</span>
           <div className="flex items-center gap-4 text-xs text-slate-400">
             <span className="flex items-center gap-1"><ShieldCheck size={12} className="text-emerald-500"/>HIPAA</span>
             <span className="flex items-center gap-1"><Database size={12} className="text-sky-500"/>FHIR R4</span>
