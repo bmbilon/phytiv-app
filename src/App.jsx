@@ -25,7 +25,7 @@ const SRC = {
   epic: { bg:"bg-blue-50", text:"text-blue-700", border:"border-blue-200", dot:"bg-blue-500", label:"Epic EHR", hex:"#2563EB", Icon:Stethoscope },
   hub:  { bg:"bg-amber-50", text:"text-amber-700", border:"border-amber-200", dot:"bg-amber-500", label:"Nutrition Hub", hex:"#D97706", Icon:Apple },
 };
-const PIE_COLORS = ["#059669","#0EA5E9","#8B5CF6","#F59E0B","#EC4899"];
+const PIE_COLORS = ["#059669","#0EA5E9","#8B5CF6","#F59E0B","#EC4899","#6366F1"];
 const STATUS = {
   improving:  { bg:"bg-emerald-50", text:"text-emerald-700", border:"border-emerald-200" },
   stable:     { bg:"bg-sky-50",     text:"text-sky-700",     border:"border-sky-200" },
@@ -38,65 +38,152 @@ const PATIENTS = [
   { id:"P-10847",name:"Maria Santos",age:58,g:"F",conds:["Type 2 Diabetes","Hypertension"],dr:"Dr. Sarah Chen",fac:"IU Health Methodist",enr:"Sep 15, 2025",status:"improving",
     a1c:{c:6.8,b:8.4,t:7.0},bp:{c:"128/82",cs:128,b:"152/96",bs:152,t:"130/80"},bmi:{c:29.1,b:32.4,t:25.0},
     trend:[{m:"Sep '25",a1c:8.4,bp:152,wt:204},{m:"Oct",a1c:8.1,bp:148,wt:200},{m:"Nov",a1c:7.6,bp:140,wt:195},{m:"Dec",a1c:7.2,bp:134,wt:190},{m:"Jan '26",a1c:6.8,bp:128,wt:186}],
-    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:94},{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:87}]},
+    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:94},{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:87}],
+    cost:{mo_b:2840,mo_a:1920,er_b:4,er_a:1,meds_b:6,meds_a:4}},
   { id:"P-10923",name:"James Wilson",age:64,g:"M",conds:["Hypertension","Hyperlipidemia"],dr:"Dr. Michael Torres",fac:"IU Health University",enr:"Oct 2, 2025",status:"improving",
     a1c:{c:5.9,b:6.1,t:5.7},bp:{c:"132/84",cs:132,b:"158/98",bs:158,t:"130/80"},bmi:{c:27.8,b:28.5,t:25.0},
     trend:[{m:"Oct '25",a1c:6.1,bp:158,wt:212},{m:"Nov",a1c:6.0,bp:150,wt:208},{m:"Dec",a1c:5.9,bp:142,wt:205},{m:"Jan '26",a1c:5.9,bp:136,wt:202},{m:"Feb",a1c:5.9,bp:132,wt:200}],
-    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"4 lbs/wk",batch:"SP-2026-0203",adh:91},{food:"Duke Blueberry",cat:"Berries",qty:"1.5 lbs/wk",batch:"BB-2026-0178",adh:78}]},
+    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"4 lbs/wk",batch:"SP-2026-0203",adh:91},{food:"Duke Blueberry",cat:"Berries",qty:"1.5 lbs/wk",batch:"BB-2026-0178",adh:78}],
+    cost:{mo_b:2200,mo_a:1680,er_b:3,er_a:1,meds_b:5,meds_a:3}},
   { id:"P-11056",name:"Keisha Brown",age:45,g:"F",conds:["Pre-diabetes","Obesity"],dr:"Dr. Sarah Chen",fac:"Eskenazi Health",enr:"Nov 10, 2025",status:"stable",
     a1c:{c:5.8,b:6.3,t:5.7},bp:{c:"124/78",cs:124,b:"138/88",bs:138,t:"120/80"},bmi:{c:33.2,b:35.8,t:30.0},
     trend:[{m:"Nov '25",a1c:6.3,bp:138,wt:232},{m:"Dec",a1c:6.1,bp:132,wt:226},{m:"Jan '26",a1c:5.9,bp:128,wt:220},{m:"Feb",a1c:5.8,bp:124,wt:216}],
-    rxs:[{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2.5 lbs/wk",batch:"BR-2026-0134",adh:82},{food:"Green Lentils",cat:"Legumes",qty:"2 lbs/wk",batch:"LN-2026-0091",adh:75}]},
+    rxs:[{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2.5 lbs/wk",batch:"BR-2026-0134",adh:82},{food:"Green Lentils",cat:"Legumes",qty:"2 lbs/wk",batch:"LN-2026-0091",adh:75}],
+    cost:{mo_b:1960,mo_a:1480,er_b:2,er_a:1,meds_b:4,meds_a:3}},
   { id:"P-11102",name:"Robert Chen",age:72,g:"M",conds:["Coronary Artery Disease","Type 2 Diabetes"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Aug 20, 2025",status:"improving",
     a1c:{c:7.1,b:9.2,t:7.0},bp:{c:"126/78",cs:126,b:"144/92",bs:144,t:"130/80"},bmi:{c:26.3,b:28.1,t:25.0},
     trend:[{m:"Aug '25",a1c:9.2,bp:144,wt:198},{m:"Sep",a1c:8.6,bp:140,wt:194},{m:"Oct",a1c:8.0,bp:136,wt:190},{m:"Nov",a1c:7.5,bp:132,wt:187},{m:"Dec",a1c:7.3,bp:128,wt:184},{m:"Jan '26",a1c:7.1,bp:126,wt:182}],
-    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"KL-2026-0147",adh:96},{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"SW-2026-0156",adh:89},{food:"Duke Blueberry",cat:"Berries",qty:"1 lb/wk",batch:"BB-2026-0178",adh:92}]},
+    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"KL-2026-0147",adh:96},{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"SW-2026-0156",adh:89},{food:"Duke Blueberry",cat:"Berries",qty:"1 lb/wk",batch:"BB-2026-0178",adh:92}],
+    cost:{mo_b:3600,mo_a:2280,er_b:5,er_a:1,meds_b:8,meds_a:5}},
   { id:"P-11234",name:"Lisa Thompson",age:38,g:"F",conds:["Gestational Diabetes"],dr:"Dr. Michael Torres",fac:"IU Health University",enr:"Dec 1, 2025",status:"monitoring",
     a1c:{c:5.6,b:6.0,t:5.5},bp:{c:"118/74",cs:118,b:"126/82",bs:126,t:"120/80"},bmi:{c:28.5,b:29.2,t:27.0},
     trend:[{m:"Dec '25",a1c:6.0,bp:126,wt:182},{m:"Jan '26",a1c:5.8,bp:122,wt:180},{m:"Feb",a1c:5.6,bp:118,wt:178}],
-    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:88},{food:"Green Lentils",cat:"Legumes",qty:"1.5 lbs/wk",batch:"LN-2026-0091",adh:71}]},
+    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:88},{food:"Green Lentils",cat:"Legumes",qty:"1.5 lbs/wk",batch:"LN-2026-0091",adh:71}],
+    cost:{mo_b:1800,mo_a:1440,er_b:2,er_a:0,meds_b:3,meds_a:2}},
+  { id:"P-11301",name:"DeShawn Williams",age:52,g:"M",conds:["Type 2 Diabetes","Obesity"],dr:"Dr. Rachel Kim",fac:"IU Health North",enr:"Sep 28, 2025",status:"improving",
+    a1c:{c:7.0,b:8.8,t:7.0},bp:{c:"130/84",cs:130,b:"146/94",bs:146,t:"130/80"},bmi:{c:31.2,b:34.6,t:28.0},
+    trend:[{m:"Sep '25",a1c:8.8,bp:146,wt:248},{m:"Oct",a1c:8.4,bp:142,wt:242},{m:"Nov",a1c:7.8,bp:138,wt:236},{m:"Dec",a1c:7.4,bp:134,wt:230},{m:"Jan '26",a1c:7.0,bp:130,wt:225}],
+    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:91},{food:"Cherry Tomato",cat:"Fruiting",qty:"2 lbs/wk",batch:"CT-2026-0210",adh:85}],
+    cost:{mo_b:3200,mo_a:2080,er_b:4,er_a:1,meds_b:7,meds_a:4}},
+  { id:"P-11345",name:"Priya Sharma",age:41,g:"F",conds:["Metabolic Syndrome"],dr:"Dr. James Okafor",fac:"IU Health University",enr:"Oct 15, 2025",status:"stable",
+    a1c:{c:5.9,b:6.4,t:5.7},bp:{c:"126/80",cs:126,b:"140/90",bs:140,t:"130/80"},bmi:{c:30.8,b:32.1,t:28.0},
+    trend:[{m:"Oct '25",a1c:6.4,bp:140,wt:196},{m:"Nov",a1c:6.2,bp:136,wt:192},{m:"Dec",a1c:6.0,bp:130,wt:188},{m:"Jan '26",a1c:5.9,bp:126,wt:185}],
+    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"SP-2026-0203",adh:89},{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2 lbs/wk",batch:"BR-2026-0134",adh:82}],
+    cost:{mo_b:2100,mo_a:1580,er_b:2,er_a:0,meds_b:4,meds_a:2}},
+  { id:"P-11402",name:"Carlos Rodriguez",age:67,g:"M",conds:["CKD Stage 2","Hypertension"],dr:"Dr. Sarah Chen",fac:"Eskenazi Health",enr:"Nov 5, 2025",status:"monitoring",
+    a1c:{c:6.2,b:6.8,t:6.0},bp:{c:"134/86",cs:134,b:"156/98",bs:156,t:"130/80"},bmi:{c:27.4,b:28.8,t:25.0},
+    trend:[{m:"Nov '25",a1c:6.8,bp:156,wt:210},{m:"Dec",a1c:6.5,bp:148,wt:206},{m:"Jan '26",a1c:6.2,bp:140,wt:202},{m:"Feb",a1c:6.2,bp:134,wt:200}],
+    rxs:[{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:80},{food:"Rainbow Chard",cat:"Leafy Greens",qty:"2.5 lbs/wk",batch:"RC-2026-0167",adh:76}],
+    cost:{mo_b:4200,mo_a:3100,er_b:5,er_a:2,meds_b:9,meds_a:7}},
+  { id:"P-11478",name:"Sarah Mitchell",age:55,g:"F",conds:["Type 2 Diabetes","Hyperlipidemia"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Aug 10, 2025",status:"improving",
+    a1c:{c:6.6,b:8.6,t:7.0},bp:{c:"124/78",cs:124,b:"142/88",bs:142,t:"130/80"},bmi:{c:26.8,b:29.4,t:25.0},
+    trend:[{m:"Aug '25",a1c:8.6,bp:142,wt:192},{m:"Sep",a1c:8.0,bp:138,wt:188},{m:"Oct",a1c:7.5,bp:134,wt:184},{m:"Nov",a1c:7.0,bp:130,wt:180},{m:"Dec",a1c:6.8,bp:126,wt:176},{m:"Jan '26",a1c:6.6,bp:124,wt:174}],
+    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"KL-2026-0147",adh:95},{food:"Duke Blueberry",cat:"Berries",qty:"1.5 lbs/wk",batch:"BB-2026-0178",adh:90}],
+    cost:{mo_b:2960,mo_a:1840,er_b:3,er_a:0,meds_b:6,meds_a:3}},
+  { id:"P-11534",name:"Anthony Davis",age:48,g:"M",conds:["Hypertension","Obesity"],dr:"Dr. Rachel Kim",fac:"IU Health West",enr:"Oct 22, 2025",status:"stable",
+    a1c:{c:5.7,b:5.9,t:5.7},bp:{c:"136/86",cs:136,b:"152/96",bs:152,t:"130/80"},bmi:{c:33.8,b:36.2,t:30.0},
+    trend:[{m:"Oct '25",a1c:5.9,bp:152,wt:264},{m:"Nov",a1c:5.8,bp:148,wt:258},{m:"Dec",a1c:5.8,bp:142,wt:252},{m:"Jan '26",a1c:5.7,bp:136,wt:248}],
+    rxs:[{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2.5 lbs/wk",batch:"SW-2026-0156",adh:84},{food:"Green Lentils",cat:"Legumes",qty:"2 lbs/wk",batch:"LN-2026-0091",adh:79}],
+    cost:{mo_b:2400,mo_a:1840,er_b:3,er_a:1,meds_b:5,meds_a:4}},
+  { id:"P-11589",name:"Mei-Lin Park",age:63,g:"F",conds:["Type 2 Diabetes","Hypertension"],dr:"Dr. James Okafor",fac:"IU Health North",enr:"Sep 8, 2025",status:"improving",
+    a1c:{c:6.9,b:8.7,t:7.0},bp:{c:"128/80",cs:128,b:"150/94",bs:150,t:"130/80"},bmi:{c:25.8,b:27.4,t:24.0},
+    trend:[{m:"Sep '25",a1c:8.7,bp:150,wt:168},{m:"Oct",a1c:8.2,bp:144,wt:164},{m:"Nov",a1c:7.6,bp:138,wt:160},{m:"Dec",a1c:7.2,bp:134,wt:156},{m:"Jan '26",a1c:6.9,bp:128,wt:154}],
+    rxs:[{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:93},{food:"Butternut Squash",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BS-2026-0195",adh:86}],
+    cost:{mo_b:3100,mo_a:1960,er_b:4,er_a:1,meds_b:7,meds_a:4}},
+  { id:"P-11623",name:"Marcus Johnson",age:44,g:"M",conds:["Pre-diabetes","Obesity"],dr:"Dr. Michael Torres",fac:"Eskenazi Health",enr:"Nov 18, 2025",status:"stable",
+    a1c:{c:5.9,b:6.2,t:5.7},bp:{c:"130/82",cs:130,b:"142/88",bs:142,t:"130/80"},bmi:{c:34.6,b:37.0,t:30.0},
+    trend:[{m:"Nov '25",a1c:6.2,bp:142,wt:268},{m:"Dec",a1c:6.1,bp:138,wt:262},{m:"Jan '26",a1c:5.9,bp:134,wt:256},{m:"Feb",a1c:5.9,bp:130,wt:252}],
+    rxs:[{food:"Calabrese Broccoli",cat:"Cruciferous",qty:"2.5 lbs/wk",batch:"BR-2026-0134",adh:77},{food:"Cherry Tomato",cat:"Fruiting",qty:"2 lbs/wk",batch:"CT-2026-0210",adh:73}],
+    cost:{mo_b:1680,mo_a:1280,er_b:2,er_a:1,meds_b:3,meds_a:2}},
+  { id:"P-11687",name:"Diana Petrov",age:71,g:"F",conds:["Heart Failure","Type 2 Diabetes"],dr:"Dr. Amanda Williams",fac:"IU Health Methodist",enr:"Jul 15, 2025",status:"improving",
+    a1c:{c:7.0,b:9.4,t:7.0},bp:{c:"122/76",cs:122,b:"148/92",bs:148,t:"130/80"},bmi:{c:25.4,b:27.6,t:24.0},
+    trend:[{m:"Jul '25",a1c:9.4,bp:148,wt:174},{m:"Aug",a1c:8.8,bp:142,wt:170},{m:"Sep",a1c:8.2,bp:138,wt:166},{m:"Oct",a1c:7.6,bp:132,wt:162},{m:"Nov",a1c:7.3,bp:128,wt:158},{m:"Dec",a1c:7.1,bp:124,wt:156},{m:"Jan '26",a1c:7.0,bp:122,wt:154}],
+    rxs:[{food:"Rainbow Chard",cat:"Leafy Greens",qty:"2.5 lbs/wk",batch:"RC-2026-0167",adh:94},{food:"Duke Blueberry",cat:"Berries",qty:"1 lb/wk",batch:"BB-2026-0178",adh:91},{food:"Green Lentils",cat:"Legumes",qty:"1.5 lbs/wk",batch:"LN-2026-0091",adh:85}],
+    cost:{mo_b:5200,mo_a:3400,er_b:6,er_a:2,meds_b:10,meds_a:7}},
+  { id:"P-11742",name:"Terrance Howard",age:36,g:"M",conds:["Obesity","Hypertension"],dr:"Dr. Rachel Kim",fac:"Community Health East",enr:"Dec 10, 2025",status:"monitoring",
+    a1c:{c:5.5,b:5.7,t:5.5},bp:{c:"138/88",cs:138,b:"148/92",bs:148,t:"130/80"},bmi:{c:36.2,b:38.0,t:30.0},
+    trend:[{m:"Dec '25",a1c:5.7,bp:148,wt:286},{m:"Jan '26",a1c:5.6,bp:142,wt:280},{m:"Feb",a1c:5.5,bp:138,wt:276}],
+    rxs:[{food:"Beauregard Sweet Potato",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"SW-2026-0156",adh:72},{food:"Baby Spinach",cat:"Leafy Greens",qty:"3 lbs/wk",batch:"SP-2026-0203",adh:68}],
+    cost:{mo_b:1960,mo_a:1640,er_b:2,er_a:1,meds_b:3,meds_a:2}},
+  { id:"P-11798",name:"Guadalupe Flores",age:59,g:"F",conds:["Type 2 Diabetes","CKD Stage 3"],dr:"Dr. James Okafor",fac:"IU Health University",enr:"Aug 28, 2025",status:"improving",
+    a1c:{c:6.8,b:9.0,t:7.0},bp:{c:"126/80",cs:126,b:"154/96",bs:154,t:"130/80"},bmi:{c:27.0,b:30.2,t:25.0},
+    trend:[{m:"Aug '25",a1c:9.0,bp:154,wt:192},{m:"Sep",a1c:8.4,bp:148,wt:188},{m:"Oct",a1c:7.8,bp:142,wt:182},{m:"Nov",a1c:7.4,bp:136,wt:178},{m:"Dec",a1c:7.0,bp:130,wt:174},{m:"Jan '26",a1c:6.8,bp:126,wt:172}],
+    rxs:[{food:"Lacinato Kale",cat:"Leafy Greens",qty:"3.5 lbs/wk",batch:"KL-2026-0147",adh:92},{food:"Detroit Red Beets",cat:"Root Vegetables",qty:"2 lbs/wk",batch:"BT-2026-0089",adh:88},{food:"Black Beans",cat:"Legumes",qty:"1.5 lbs/wk",batch:"BK-2026-0142",adh:81}],
+    cost:{mo_b:4800,mo_a:3200,er_b:6,er_a:2,meds_b:9,meds_a:6}},
 ];
 
 const BATCHES = [
   { id:"KL-2026-0147",crop:"Lacinato Kale",cat:"Leafy Greens",env:"Greenhouse A",harvested:"Jan 28, 2026",score:94,yield:"148 lbs",status:"Active",
     cond:[{d:"D1",temp:72,hum:65,light:840},{d:"D7",temp:74,hum:62,light:860},{d:"D14",temp:73,hum:68,light:820},{d:"D21",temp:71,hum:64,light:850},{d:"D28",temp:75,hum:60,light:870},{d:"D35",temp:73,hum:63,light:845}],
     nut:{vitA:96,vitC:88,iron:82,calcium:91,fiber:94,antioxidants:97},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-10847","P-11102"],out:{a1c:-1.9,bp:-20}},
+    pats:["P-10847","P-11102","P-11301","P-11478","P-11798"],out:{a1c:-1.9,bp:-21}},
   { id:"SP-2026-0203",crop:"Baby Spinach",cat:"Leafy Greens",env:"Greenhouse B",harvested:"Feb 1, 2026",score:91,yield:"112 lbs",status:"Active",
     cond:[{d:"D1",temp:68,hum:70,light:780},{d:"D7",temp:70,hum:68,light:800},{d:"D14",temp:69,hum:72,light:760},{d:"D21",temp:71,hum:66,light:810},{d:"D28",temp:70,hum:69,light:790}],
     nut:{vitA:92,vitC:78,iron:90,calcium:85,fiber:80,antioxidants:88},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-10923","P-11234"],out:{a1c:-0.3,bp:-22}},
+    pats:["P-10923","P-11234","P-11345","P-11589","P-11742"],out:{a1c:-0.4,bp:-20}},
   { id:"BT-2026-0089",crop:"Detroit Red Beets",cat:"Root Vegetables",env:"Field Plot 3",harvested:"Jan 15, 2026",score:88,yield:"96 lbs",status:"Active",
     cond:[{d:"D1",temp:58,hum:55,light:920},{d:"D14",temp:62,hum:52,light:940},{d:"D28",temp:60,hum:58,light:900},{d:"D42",temp:64,hum:50,light:960},{d:"D56",temp:61,hum:54,light:930}],
     nut:{vitA:72,vitC:68,iron:88,calcium:70,fiber:92,antioxidants:86},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-10847"],out:{a1c:-1.6,bp:-24}},
+    pats:["P-10847","P-11402","P-11798"],out:{a1c:-1.4,bp:-22}},
   { id:"SW-2026-0156",crop:"Beauregard Sweet Potato",cat:"Root Vegetables",env:"Field Plot 1",harvested:"Jan 20, 2026",score:85,yield:"204 lbs",status:"Active",
     cond:[{d:"D1",temp:76,hum:60,light:980},{d:"D14",temp:78,hum:58,light:1000},{d:"D28",temp:77,hum:62,light:960},{d:"D42",temp:80,hum:56,light:1020},{d:"D56",temp:78,hum:59,light:990}],
     nut:{vitA:98,vitC:62,iron:68,calcium:64,fiber:78,antioxidants:74},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-11102"],out:{a1c:-2.1,bp:-18}},
+    pats:["P-11102","P-11534","P-11742"],out:{a1c:-1.2,bp:-16}},
   { id:"BB-2026-0178",crop:"Duke Blueberry",cat:"Berries",env:"Greenhouse C",harvested:"Feb 3, 2026",score:92,yield:"64 lbs",status:"Active",
     cond:[{d:"D1",temp:66,hum:72,light:720},{d:"D7",temp:68,hum:70,light:740},{d:"D14",temp:67,hum:74,light:710},{d:"D21",temp:69,hum:68,light:750}],
     nut:{vitA:58,vitC:95,iron:52,calcium:48,fiber:72,antioxidants:98},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-10923","P-11102"],out:{a1c:-0.4,bp:-16}},
+    pats:["P-10923","P-11102","P-11478","P-11687"],out:{a1c:-0.8,bp:-18}},
   { id:"BR-2026-0134",crop:"Calabrese Broccoli",cat:"Cruciferous",env:"Greenhouse A",harvested:"Jan 22, 2026",score:87,yield:"88 lbs",status:"Active",
     cond:[{d:"D1",temp:64,hum:68,light:800},{d:"D10",temp:66,hum:65,light:820},{d:"D20",temp:65,hum:70,light:790},{d:"D30",temp:67,hum:64,light:830}],
     nut:{vitA:82,vitC:92,iron:74,calcium:88,fiber:86,antioxidants:90},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
-    pats:["P-11056"],out:{a1c:-0.5,bp:-14}},
+    pats:["P-11056","P-11345","P-11623"],out:{a1c:-0.4,bp:-12}},
+  { id:"LN-2026-0091",crop:"Green Lentils",cat:"Legumes",env:"Field Plot 2",harvested:"Jan 25, 2026",score:83,yield:"78 lbs",status:"Active",
+    cond:[{d:"D1",temp:70,hum:58,light:860},{d:"D14",temp:72,hum:55,light:880},{d:"D28",temp:71,hum:60,light:840},{d:"D42",temp:74,hum:54,light:900},{d:"D56",temp:72,hum:57,light:870}],
+    nut:{vitA:42,vitC:38,iron:94,calcium:52,fiber:96,antioxidants:68},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
+    pats:["P-11056","P-11534","P-11687"],out:{a1c:-0.5,bp:-14}},
+  { id:"CT-2026-0210",crop:"Cherry Tomato",cat:"Fruiting",env:"Greenhouse B",harvested:"Feb 5, 2026",score:89,yield:"92 lbs",status:"Active",
+    cond:[{d:"D1",temp:74,hum:62,light:900},{d:"D7",temp:76,hum:60,light:920},{d:"D14",temp:75,hum:64,light:880},{d:"D21",temp:77,hum:58,light:940},{d:"D28",temp:76,hum:61,light:910}],
+    nut:{vitA:88,vitC:84,iron:48,calcium:42,fiber:52,antioxidants:92},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
+    pats:["P-11301","P-11623"],out:{a1c:-1.1,bp:-12}},
+  { id:"RC-2026-0167",crop:"Rainbow Chard",cat:"Leafy Greens",env:"Greenhouse A",harvested:"Jan 18, 2026",score:90,yield:"104 lbs",status:"Active",
+    cond:[{d:"D1",temp:68,hum:66,light:820},{d:"D7",temp:70,hum:64,light:840},{d:"D14",temp:69,hum:68,light:800},{d:"D21",temp:72,hum:62,light:860},{d:"D28",temp:71,hum:65,light:830}],
+    nut:{vitA:94,vitC:82,iron:86,calcium:78,fiber:88,antioxidants:91},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
+    pats:["P-11402","P-11687"],out:{a1c:-1.6,bp:-20}},
+  { id:"BS-2026-0195",crop:"Butternut Squash",cat:"Root Vegetables",env:"Field Plot 1",harvested:"Jan 10, 2026",score:86,yield:"168 lbs",status:"Active",
+    cond:[{d:"D1",temp:74,hum:56,light:960},{d:"D14",temp:76,hum:54,light:980},{d:"D28",temp:75,hum:58,light:940},{d:"D42",temp:78,hum:52,light:1000},{d:"D56",temp:76,hum:55,light:970}],
+    nut:{vitA:96,vitC:58,iron:62,calcium:68,fiber:82,antioxidants:78},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
+    pats:["P-11589"],out:{a1c:-1.8,bp:-22}},
+  { id:"BK-2026-0142",crop:"Black Beans",cat:"Legumes",env:"Field Plot 3",harvested:"Feb 1, 2026",score:81,yield:"56 lbs",status:"Active",
+    cond:[{d:"D1",temp:72,hum:54,light:880},{d:"D14",temp:74,hum:52,light:900},{d:"D28",temp:73,hum:56,light:860},{d:"D42",temp:76,hum:50,light:920},{d:"D56",temp:74,hum:53,light:890}],
+    nut:{vitA:38,vitC:32,iron:92,calcium:58,fiber:98,antioxidants:72},avg:{vitA:78,vitC:74,iron:70,calcium:76,fiber:80,antioxidants:72},
+    pats:["P-11798"],out:{a1c:-2.2,bp:-28}},
 ];
 
 const TRENDS = [
-  {m:"Aug '25",a1c:8.1,bp:148,n:8},{m:"Sep",a1c:7.8,bp:146,n:14},{m:"Oct",a1c:7.4,bp:142,n:22},
-  {m:"Nov",a1c:7.1,bp:138,n:30},{m:"Dec",a1c:6.9,bp:134,n:36},{m:"Jan '26",a1c:6.7,bp:130,n:42},{m:"Feb",a1c:6.5,bp:127,n:47},
+  {m:"Jun '25",a1c:8.4,bp:152,n:8},{m:"Jul",a1c:8.2,bp:150,n:14},{m:"Aug",a1c:8.0,bp:148,n:22},
+  {m:"Sep",a1c:7.6,bp:144,n:32},{m:"Oct",a1c:7.3,bp:140,n:42},{m:"Nov",a1c:7.0,bp:136,n:50},
+  {m:"Dec",a1c:6.8,bp:132,n:56},{m:"Jan '26",a1c:6.5,bp:128,n:60},{m:"Feb",a1c:6.3,bp:126,n:62},
 ];
-const FOOD_MIX = [{name:"Leafy Greens",v:34},{name:"Root Vegetables",v:22},{name:"Berries",v:18},{name:"Legumes",v:15},{name:"Cruciferous",v:11}];
-const SPARKS = { pts:[8,14,22,30,36,42,47], rx:[12,28,41,56,68,79,89], a1c:[8.1,7.8,7.4,7.1,6.9,6.7,6.5], batch:[4,7,10,14,18,21,24] };
+const FOOD_MIX = [{name:"Leafy Greens",v:48},{name:"Root Vegetables",v:34},{name:"Berries",v:28},{name:"Legumes",v:24},{name:"Cruciferous",v:16},{name:"Fruiting",v:6}];
+const SPARKS = { pts:[8,14,22,32,42,50,56,60,62], rx:[18,36,58,82,108,128,142,152,156], a1c:[8.4,8.2,8.0,7.6,7.3,7.0,6.8,6.5,6.3], batch:[4,8,14,20,28,34,40,45,48] };
 const FEED = [
-  {t:"2 min ago",msg:"Batch KL-2026-0147 nutrient assay synced",src:"leaf"},
-  {t:"8 min ago",msg:"Maria Santos — A1C result received: 6.8%",src:"epic"},
-  {t:"15 min ago",msg:"Weekly fulfillment report: 89 Rx filled",src:"hub"},
-  {t:"22 min ago",msg:"Greenhouse A environment telemetry synced",src:"leaf"},
-  {t:"34 min ago",msg:"Robert Chen — lipid panel imported",src:"epic"},
-  {t:"1 hr ago",msg:"12 prescriptions dispensed at Hub East",src:"hub"},
+  {t:"1 min ago",msg:"Batch RC-2026-0167 nutrient assay — Rainbow Chard score: 90/100",src:"leaf"},
+  {t:"4 min ago",msg:"Diana Petrov — A1C result received: 7.0% (target met)",src:"epic"},
+  {t:"11 min ago",msg:"Weekly fulfillment report: 156 Rx filled across 5 hubs",src:"hub"},
+  {t:"18 min ago",msg:"Greenhouse A temp alert cleared — 72°F nominal (Leaf sensor GH-A-04)",src:"leaf"},
+  {t:"24 min ago",msg:"DeShawn Williams — lipid panel imported, LDL ↓ 18mg/dL",src:"epic"},
+  {t:"31 min ago",msg:"Batch BK-2026-0142 QC passed — Black Beans iron: 92nd percentile",src:"leaf"},
+  {t:"38 min ago",msg:"Carlos Rodriguez — eGFR stable at 68 mL/min (CKD monitoring)",src:"epic"},
+  {t:"45 min ago",msg:"18 prescriptions dispensed at Hub North — 100% batch-traced",src:"hub"},
+];
+const ROI = {
+  totalSavings:284600, perPat:4590, erAvoided:146, medsReduced:189, roiRatio:3.2,
+  medCostAvoid:142800, erCostAvoid:141800,
+};
+const COST_TREND = [
+  {m:"Jun '25",fam:3420,ctrl:3380},{m:"Jul",fam:3280,ctrl:3400},{m:"Aug",fam:3060,ctrl:3420},
+  {m:"Sep",fam:2800,ctrl:3440},{m:"Oct",fam:2580,ctrl:3460},{m:"Nov",fam:2380,ctrl:3480},
+  {m:"Dec",fam:2220,ctrl:3500},{m:"Jan '26",fam:2080,ctrl:3520},{m:"Feb",fam:1960,ctrl:3540},
 ];
 
 // ── Research Data ────────────────────────────────────────────────────
@@ -164,10 +251,17 @@ const Arrow = () => <div className="flex items-center justify-center px-1 flex-s
 const DashboardView = ({goTo}) => (
   <div className="space-y-6 max-w-7xl">
     <div className="grid grid-cols-4 gap-5">
-      <KPI label="Enrolled Patients" value="47" sub="across 3 facilities" icon={Users} trend={12} spark={SPARKS.pts} sparkColor="#059669"/>
-      <KPI label="Active Food Rx" value="89" sub="this month" icon={Apple} iconBg="bg-amber-50" iconColor="text-amber-600" trend={8} spark={SPARKS.rx} sparkColor="#D97706"/>
-      <KPI label="Avg A1C Reduction" value="1.4%" sub="from baseline" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600" trend={18} spark={SPARKS.a1c} sparkColor="#0EA5E9"/>
-      <KPI label="Tracked Batches" value="24" sub="6 active crops" icon={Package} iconBg="bg-violet-50" iconColor="text-violet-600" trend={6} spark={SPARKS.batch} sparkColor="#8B5CF6"/>
+      <KPI label="Enrolled Patients" value="62" sub="across 5 facilities" icon={Users} trend={18} spark={SPARKS.pts} sparkColor="#059669"/>
+      <KPI label="Active Food Rx" value="156" sub="this month" icon={Apple} iconBg="bg-amber-50" iconColor="text-amber-600" trend={14} spark={SPARKS.rx} sparkColor="#D97706"/>
+      <KPI label="Avg A1C Reduction" value="2.1%" sub="from baseline" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600" trend={24} spark={SPARKS.a1c} sparkColor="#0EA5E9"/>
+      <KPI label="Tracked Batches" value="48" sub="11 active crops" icon={Package} iconBg="bg-violet-50" iconColor="text-violet-600" trend={12} spark={SPARKS.batch} sparkColor="#8B5CF6"/>
+    </div>
+
+    <div className="grid grid-cols-4 gap-5">
+      <KPI label="Annual Cost Savings" value="$284.6K" sub="projected annualized" icon={TrendingUp} iconBg="bg-emerald-50" iconColor="text-emerald-600" trend={32}/>
+      <KPI label="Per-Patient Savings" value="$4,590" sub="avg annual" icon={Heart} iconBg="bg-rose-50" iconColor="text-rose-600" trend={28}/>
+      <KPI label="ER Visits Avoided" value="146" sub="annualized projection" icon={Activity} iconBg="bg-red-50" iconColor="text-red-600" trend={41}/>
+      <KPI label="Program ROI" value="3.2x" sub="$3.20 returned per $1 invested" icon={Scale} iconBg="bg-amber-50" iconColor="text-amber-600" trend={22}/>
     </div>
 
     <div className="grid grid-cols-3 gap-5">
@@ -199,6 +293,53 @@ const DashboardView = ({goTo}) => (
         </ResponsiveContainer>
         <div className="space-y-2 mt-3">
           {FOOD_MIX.map((f,i)=><div key={i} className="flex items-center justify-between"><div className="flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-sm" style={{background:PIE_COLORS[i]}}/><span className="text-xs text-slate-600">{f.name}</span></div><span className="text-xs font-semibold text-slate-900">{f.v}</span></div>)}
+        </div>
+      </div>
+    </div>
+
+    <div className="grid grid-cols-2 gap-5">
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-5">
+          <div><h3 className="text-sm font-bold text-slate-900">Healthcare Cost Divergence</h3><p className="text-xs text-slate-400 mt-0.5">Monthly per-patient cost — FaM cohort vs. standard of care</p></div>
+          <div className="flex gap-5 text-xs font-medium">
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>FaM Cohort</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-slate-400"/>Standard Care</span>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={220}>
+          <AreaChart data={COST_TREND}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false}/>
+            <XAxis dataKey="m" tick={{fontSize:11,fill:"#94a3b8"}} axisLine={{stroke:"#e2e8f0"}} tickLine={false}/>
+            <YAxis tick={{fontSize:11,fill:"#94a3b8"}} axisLine={false} tickLine={false} tickFormatter={(v)=>`$${(v/1000).toFixed(1)}K`}/>
+            <Tooltip content={<TT/>}/>
+            <Area type="monotone" dataKey="ctrl" stroke="#94A3B8" fill="#F1F5F9" fillOpacity={0.5} strokeWidth={2} strokeDasharray="6 3" name="Standard Care ($/mo)"/>
+            <Area type="monotone" dataKey="fam" stroke="#059669" fill="#D1FAE5" fillOpacity={0.4} strokeWidth={2.5} name="FaM Cohort ($/mo)"/>
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 className="text-sm font-bold text-slate-900 mb-1">Cost Savings Breakdown</h3>
+        <p className="text-xs text-slate-400 mb-5">Annualized projection across 62 enrolled patients</p>
+        <div className="space-y-4">
+          {[
+            {label:"ER Visit Avoidance",val:"$141,800",pct:50,color:"bg-red-500",sub:"146 visits avoided × $971 avg cost"},
+            {label:"Medication Reduction",val:"$142,800",pct:50,color:"bg-blue-500",sub:"189 med courses eliminated × $756 avg/year"},
+            {label:"Inpatient Admissions Avoided",val:"$68,400",pct:24,color:"bg-violet-500",sub:"12 admissions avoided × $5,700 avg"},
+            {label:"Lab / Monitoring Reduction",val:"$31,600",pct:11,color:"bg-amber-500",sub:"Reduced frequency due to stabilized biomarkers"},
+          ].map((s,i)=>(
+            <div key={i}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-semibold text-slate-700">{s.label}</span>
+                <span className="text-sm font-bold text-slate-900">{s.val}</span>
+              </div>
+              <Pbar v={s.pct} color={s.color}/>
+              <p className="text-xs text-slate-400 mt-1">{s.sub}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+          <span className="text-sm font-bold text-slate-900">Total Projected Savings</span>
+          <span className="text-xl font-bold text-emerald-600">$384,600<span className="text-xs text-slate-400 font-normal ml-1">/year</span></span>
         </div>
       </div>
     </div>
@@ -326,6 +467,34 @@ const PatientDetail = ({p,goTo,goBack:back}) => {
         </div>
       ))}
     </div>
+
+    {p.cost && (
+      <div className="bg-white rounded-xl border border-gray-200 p-5 mb-5 shadow-sm">
+        <div className="flex items-center justify-between mb-4"><Sect>Cost Impact</Sect><Badge src="epic"/></div>
+        <div className="grid grid-cols-4 gap-5">
+          <div>
+            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Cost</p>
+            <p className="text-2xl font-bold text-emerald-600 mt-1">${p.cost.mo_a.toLocaleString()}<span className="text-xs text-slate-400 font-normal ml-1">/mo</span></p>
+            <div className="flex items-center gap-1.5 mt-1"><span className="text-xs font-bold text-emerald-600"><ArrowDownRight size={11} className="inline"/>-${(p.cost.mo_b-p.cost.mo_a).toLocaleString()}</span><span className="text-xs text-slate-400">from ${p.cost.mo_b.toLocaleString()}</span></div>
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Annual Savings</p>
+            <p className="text-2xl font-bold text-emerald-600 mt-1">${((p.cost.mo_b-p.cost.mo_a)*12).toLocaleString()}</p>
+            <p className="text-xs text-slate-400 mt-1">projected annualized</p>
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">ER Visits / Year</p>
+            <p className="text-2xl font-bold text-slate-900 mt-1">{p.cost.er_a}<span className="text-xs text-slate-400 font-normal ml-1.5">was {p.cost.er_b}</span></p>
+            <div className="flex items-center gap-1.5 mt-1"><span className="text-xs font-bold text-emerald-600">{p.cost.er_b-p.cost.er_a} avoided</span><span className="text-xs text-slate-400">≈ ${((p.cost.er_b-p.cost.er_a)*971).toLocaleString()} saved</span></div>
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Medications</p>
+            <p className="text-2xl font-bold text-slate-900 mt-1">{p.cost.meds_a}<span className="text-xs text-slate-400 font-normal ml-1.5">was {p.cost.meds_b}</span></p>
+            <div className="flex items-center gap-1.5 mt-1"><span className="text-xs font-bold text-emerald-600">{p.cost.meds_b-p.cost.meds_a} eliminated</span><span className="text-xs text-slate-400">≈ ${((p.cost.meds_b-p.cost.meds_a)*756).toLocaleString()}/yr</span></div>
+          </div>
+        </div>
+      </div>
+    )}
 
     <Tab labels={["Health Trends","Food Prescriptions","Batch Traceability"]} active={tab} set={setTab}/>
 
@@ -578,10 +747,10 @@ const ResearchView = () => {
     </div>
 
     <div className="grid grid-cols-4 gap-5">
-      <KPI label="Research Cohort" value="47" sub="enrolled patients" icon={Users} iconBg="bg-violet-50" iconColor="text-violet-600"/>
-      <KPI label="Significant Correlations" value="5 / 7" sub="crops at p<0.05" icon={CheckCircle2} iconBg="bg-emerald-50" iconColor="text-emerald-600"/>
-      <KPI label="Avg A1C Reduction" value="1.01%" sub="FaM cohort (n=47)" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600"/>
-      <KPI label="Control Diff" value="0.3%" sub="vs. standard of care" icon={Activity} iconBg="bg-amber-50" iconColor="text-amber-600"/>
+      <KPI label="Research Cohort" value="62" sub="enrolled patients" icon={Users} iconBg="bg-violet-50" iconColor="text-violet-600"/>
+      <KPI label="Significant Correlations" value="6 / 7" sub="crops at p<0.05" icon={CheckCircle2} iconBg="bg-emerald-50" iconColor="text-emerald-600"/>
+      <KPI label="Avg A1C Reduction" value="1.6%" sub="FaM cohort (n=62)" icon={TrendingUp} iconBg="bg-sky-50" iconColor="text-sky-600"/>
+      <KPI label="Control Diff" value="1.6%" sub="vs. standard of care (p<0.001)" icon={Activity} iconBg="bg-amber-50" iconColor="text-amber-600"/>
     </div>
 
     <Tab labels={["Crop Correlations","Cohort Analysis","Nutrient → Outcome","Data Export"]} active={tab} set={setTab}/>
@@ -643,8 +812,8 @@ const ResearchView = () => {
         <div className="flex items-center justify-between mb-5">
           <div><h3 className="text-sm font-bold text-slate-900">FaM Cohort vs. Standard of Care</h3><p className="text-xs text-slate-400 mt-0.5">Average A1C trajectory over 6 months — food-as-medicine cohort vs. matched control</p></div>
           <div className="flex gap-5 text-xs font-medium">
-            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>FaM Cohort (n=47)</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-slate-400"/>Standard Care (n=52)</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-emerald-500"/>FaM Cohort (n=62)</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded bg-slate-400"/>Standard Care (n=68)</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={320}>
@@ -709,9 +878,9 @@ const ResearchView = () => {
           </div>
           <div className="grid grid-cols-3 gap-4">
             {[
-              {fmt:"REDCap",desc:"XML format compatible with REDCap v14.x. Includes data dictionary, instrument mappings, and repeating event structure.",icon:Database,ext:".xml",rows:"47 records × 86 fields",color:"border-red-200 bg-red-50"},
-              {fmt:"CSV Bundle",desc:"Flat file export with patient outcomes, crop data, and nutrient profiles. UTF-8 encoded, comma-delimited.",icon:FileText,ext:".csv (3 files)",rows:"47 patients, 24 batches, 89 Rx",color:"border-sky-200 bg-sky-50"},
-              {fmt:"SPSS",desc:"Statistical package format with variable labels, value labels, and measurement scales pre-configured.",icon:BarChart3,ext:".sav",rows:"47 records × 86 variables",color:"border-violet-200 bg-violet-50"},
+              {fmt:"REDCap",desc:"XML format compatible with REDCap v14.x. Includes data dictionary, instrument mappings, and repeating event structure.",icon:Database,ext:".xml",rows:"62 records × 94 fields",color:"border-red-200 bg-red-50"},
+              {fmt:"CSV Bundle",desc:"Flat file export with patient outcomes, crop data, nutrient profiles, and cost impact data. UTF-8 encoded, comma-delimited.",icon:FileText,ext:".csv (5 files)",rows:"62 patients, 48 batches, 156 Rx",color:"border-sky-200 bg-sky-50"},
+              {fmt:"SPSS",desc:"Statistical package format with variable labels, value labels, and measurement scales pre-configured. Includes cost variables.",icon:BarChart3,ext:".sav",rows:"62 records × 94 variables",color:"border-violet-200 bg-violet-50"},
             ].map((e,i)=>(
               <div key={i} className={`rounded-xl border-2 p-5 ${e.color} hover:shadow-md transition-all cursor-pointer`}>
                 <div className="flex items-center gap-3 mb-3">
@@ -735,7 +904,7 @@ const ResearchView = () => {
               {label:"De-identification Method",val:"HIPAA Safe Harbor (18 identifiers removed)",icon:ShieldCheck,color:"text-emerald-600"},
               {label:"IRB Protocol",val:"IU #2025-0847-FaM (Approved Dec 2025)",icon:FileText,color:"text-blue-600"},
               {label:"Data Use Agreement",val:"IU Health × Marion County HD (Active)",icon:Lock,color:"text-violet-600"},
-              {label:"Export Audit Trail",val:"12 exports since Jan 2026 · 0 incidents",icon:Eye,color:"text-amber-600"},
+              {label:"Export Audit Trail",val:"18 exports since Oct 2025 · 0 incidents",icon:Eye,color:"text-amber-600"},
             ].map((c,i)=>(
               <div key={i} className="flex items-start gap-3 p-4 rounded-lg bg-slate-50 border border-slate-200">
                 <c.icon size={16} className={`mt-0.5 ${c.color} flex-shrink-0`}/>
